@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 507" width="380" height="507">
+  <defs>
+    <linearGradient id="coverGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#0d1828"/>
+      <stop offset="55%"  stop-color="#0f1e30"/>
+      <stop offset="100%" stop-color="#070d18"/>
+    </linearGradient>
+    <linearGradient id="spineGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#050a14"/>
+      <stop offset="100%" stop-color="#0b1525"/>
+    </linearGradient>
+    <linearGradient id="topEdgeGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#d6ccba"/>
+      <stop offset="100%" stop-color="#b0a898"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-5%" width="130%" height="130%">
+      <feDropShadow dx="6" dy="8" stdDeviation="10" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+    <!-- Clip front cover content to front face only -->
+    <clipPath id="frontClip">
+      <polygon points="28,0 380,0 380,507 28,507"/>
+    </clipPath>
+  </defs>
+
+  <!-- Drop shadow underneath the whole book -->
+  <ellipse cx="204" cy="504" rx="170" ry="7" fill="#000000" opacity="0.35"/>
+
+  <g filter="url(#shadow)">
+
+    <!-- ── SPINE (thinner: 28px wide) ── -->
+    <polygon points="0,12 28,0 28,507 0,507" fill="url(#spineGrad)"/>
+
+    <!-- Spine left edge highlight -->
+    <line x1="0" y1="12" x2="0" y2="507" stroke="#1c2d45" stroke-width="1.2"/>
+
+    <!-- Spine vertical title: "Cycling Cities" – centered, white, larger -->
+    <text
+      transform="translate(14, 254) rotate(-90)"
+      font-family="Georgia, 'Times New Roman', serif"
+      font-size="13"
+      fill="#ffffff"
+      text-anchor="middle"
+      letter-spacing="2"
+      opacity="0.95">Cycling Cities</text>
+
+    <!-- ── TOP EDGE (pages visible) ── -->
+    <polygon points="0,12 28,0 28,7 0,19" fill="url(#topEdgeGrad)"/>
+    <!-- Subtle page lines on top edge -->
+    <line x1="2" y1="15" x2="26" y2="3"  stroke="#a09080" stroke-width="0.4" opacity="0.4"/>
+    <line x1="2" y1="17" x2="26" y2="5"  stroke="#a09080" stroke-width="0.4" opacity="0.3"/>
+
+    <!-- ── FRONT COVER ── -->
+    <!-- Spine width 28px → front cover x: 28–380, width: 352, center x: 204 -->
+    <polygon points="28,0 380,0 380,507 28,507" fill="url(#coverGrad)"/>
+
+    <!-- All cover content clipped to front face -->
+    <g clip-path="url(#frontClip)">
+
+      <!-- Bicycle wheel (decorative, faint) – center x=204, cy=295, r=148/136 -->
+      <circle cx="204" cy="295" r="148" fill="none" stroke="#b8975a" stroke-width="1.2" opacity="0.16"/>
+      <circle cx="204" cy="295" r="136" fill="none" stroke="#b8975a" stroke-width="0.4" opacity="0.08"/>
+      <circle cx="204" cy="295" r="12"  fill="none" stroke="#b8975a" stroke-width="1.4" opacity="0.18"/>
+      <circle cx="204" cy="295" r="4"   fill="#b8975a" opacity="0.18"/>
+
+      <!-- 12 spokes at 30° intervals (cx=204, cy=295, r=136) -->
+      <line x1="204" y1="295" x2="204"   y2="159"   stroke="#b8975a" stroke-width="0.6" opacity="0.12"/>
+      <line x1="204" y1="295" x2="272"   y2="177.2" stroke="#b8975a" stroke-width="0.6" opacity="0.12"/>
+      <line x1="204" y1="295" x2="321.8" y2="227"   stroke="#b8975a" stroke-width="0.6" opacity="0.12"/>
+      <line x1="204" y1="295" x2="340"   y2="295"   stroke="#b8975a" stroke-width="0.6" opacity="0.12"/>
+      <line x1="204" y1="295" x2="321.8" y2="363"   stroke="#b8975a" stroke-width="0.6" opacity="0.12"/>
+      <line x1="204" y1="295" x2="272"   y2="412.8" stroke="#b8975a" stroke-width="0.6" opacity="0.12"/>
+      <line x1="204" y1="295" x2="204"   y2="431"   stroke="#b8975a" stroke-width="0.6" opacity="0.12"/>
+      <line x1="204" y1="295" x2="136"   y2="412.8" stroke="#b8975a" stroke-width="0.6" opacity="0.12"/>
+      <line x1="204" y1="295" x2="86.2"  y2="363"   stroke="#b8975a" stroke-width="0.6" opacity="0.12"/>
+      <line x1="204" y1="295" x2="68"    y2="295"   stroke="#b8975a" stroke-width="0.6" opacity="0.12"/>
+      <line x1="204" y1="295" x2="86.2"  y2="227"   stroke="#b8975a" stroke-width="0.6" opacity="0.12"/>
+      <line x1="204" y1="295" x2="136"   y2="177.2" stroke="#b8975a" stroke-width="0.6" opacity="0.12"/>
+
+      <!-- City skyline silhouette (bottom) -->
+      <path d="
+        M28,507  L28,440
+        L48,440  L48,420 L56,420  L56,440
+        L70,440  L70,402 L78,402  L78,390  L86,390  L86,378  L94,378  L94,390  L102,390 L102,402 L110,402 L110,440
+        L125,440 L125,420 L133,420 L133,440
+        L148,440 L148,405 L156,405 L156,393 L164,393 L164,382 L172,382 L172,393 L180,393 L180,405 L188,405 L188,440
+        L204,440 L204,418 L212,418 L212,440
+        L226,440 L226,400 L234,400 L234,385 L242,385 L242,373 L250,373 L250,385 L258,385 L258,400 L266,400 L266,440
+        L280,440 L280,422 L288,422 L288,440
+        L300,440 L300,408 L308,408 L308,396 L316,396 L316,408 L324,408 L324,440
+        L340,440 L340,425 L348,425 L348,440
+        L362,440 L362,415 L370,415 L370,440
+        L380,440 L380,507 Z"
+        fill="#b8975a" opacity="0.07"/>
+
+      <!-- Top accent rule -->
+      <line x1="70"  y1="28" x2="340" y2="28" stroke="#b8975a" stroke-width="0.8" opacity="0.55"/>
+      <!-- Bottom accent rule -->
+      <line x1="70"  y1="479" x2="340" y2="479" stroke="#b8975a" stroke-width="0.8" opacity="0.55"/>
+
+      <!-- Author name -->
+      <text x="204" y="50"
+            font-family="Georgia, 'Times New Roman', serif"
+            font-size="10.5"
+            fill="#b8975a"
+            text-anchor="middle"
+            letter-spacing="3.5"
+            opacity="0.85">INGWAR PEROWANOWITSCH</text>
+
+      <!-- Main title: Cycling -->
+      <text x="204" y="152"
+            font-family="Georgia, 'Times New Roman', serif"
+            font-size="60"
+            fill="#ffffff"
+            text-anchor="middle"
+            font-weight="bold"
+            letter-spacing="1">Cycling</text>
+
+      <!-- Main title: Cities -->
+      <text x="204" y="213"
+            font-family="Georgia, 'Times New Roman', serif"
+            font-size="60"
+            fill="#ffffff"
+            text-anchor="middle"
+            font-weight="bold"
+            letter-spacing="1">Cities</text>
+
+      <!-- Divider line -->
+      <line x1="116" y1="234" x2="292" y2="234" stroke="#b8975a" stroke-width="0.8" opacity="0.65"/>
+
+      <!-- Subtitle line 1 -->
+      <text x="204" y="261"
+            font-family="Georgia, 'Times New Roman', serif"
+            font-size="14"
+            fill="#b8975a"
+            text-anchor="middle"
+            font-style="italic"
+            letter-spacing="0.5">Eine leise Revolution</text>
+
+      <!-- Subtitle line 2 -->
+      <text x="204" y="281"
+            font-family="Georgia, 'Times New Roman', serif"
+            font-size="14"
+            fill="#b8975a"
+            text-anchor="middle"
+            font-style="italic"
+            letter-spacing="0.5">der Städte</text>
+
+    </g><!-- /clip -->
+
+    <!-- Spine-to-cover edge line -->
+    <line x1="28" y1="0" x2="28" y2="507" stroke="#1a2d45" stroke-width="0.8" opacity="0.6"/>
+
+  </g><!-- /shadow group -->
+
+</svg>
