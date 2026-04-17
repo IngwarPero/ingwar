@@ -172,9 +172,9 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0a0a0a;
-      --bg2: #0a0a0a;
-      --bg3: #0a0a0a;
+      --bg: #000000;
+      --bg2: #000000;
+      --bg3: #000000;
       --text: #f0ede8;
       --muted: #888880;
       --accent: #c8b882;
@@ -202,13 +202,13 @@
       align-items: center;
       justify-content: space-between;
       padding: 1.4rem 4rem;
-      background: linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, transparent 100%);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, transparent 100%);
       backdrop-filter: blur(4px);
       border-bottom: 1px solid transparent;
       transition: border-color 0.3s, background 0.3s;
     }
     nav.scrolled {
-      background: rgba(10,10,10,0.97);
+      background: rgba(0,0,0,0.97);
       border-bottom-color: var(--border);
     }
     .nav-logo {
@@ -322,22 +322,26 @@
       inset: 0;
       background: linear-gradient(
         to bottom,
-        rgba(10,10,10,0.25) 0%,
-        rgba(10,10,10,0.15) 40%,
-        rgba(10,10,10,0.75) 80%,
-        rgba(10,10,10,1) 100%
+        rgba(0,0,0,0.25) 0%,
+        rgba(0,0,0,0.15) 40%,
+        rgba(0,0,0,0.75) 80%,
+        rgba(0,0,0,1) 100%
       );
     }
     .hero-content {
       position: absolute;
-      bottom: calc(5rem + 2cm);
-      left: 4rem;
+      bottom: calc(1rem + 1.8cm);
+      left: 0;
+      right: 0;
       z-index: 2;
-      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
     }
     .hero-content h1 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3.2rem, 7vw, 6.5rem);
+      font-size: clamp(1.5rem, 4.2vw, 3rem);
       font-weight: 300;
       line-height: 1.05;
       letter-spacing: -0.01em;
@@ -362,6 +366,38 @@
       transition: background 0.25s, color 0.25s;
     }
     .hero-cta:hover { background: var(--accent); color: var(--bg); }
+
+    #about-social {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      justify-content: center;
+    }
+    @media (max-width: 768px) {
+      #hero-name { display: none; }
+      #hero-name-wrap {
+        margin-left: 2mm !important;
+        align-self: center;
+        gap: 0 !important;
+      }
+      #hero-name-wrap img {
+        margin-top: 2.5rem !important;
+        margin-bottom: 0.3rem !important;
+      }
+      #about-social { display: none; }
+      #hero-preorder-btn {
+        margin-top: 0.3rem !important;
+        width: 150px !important;
+        padding: 0.45rem 0 !important;
+        font-size: 0.65rem !important;
+      }
+      #hero-about-btn {
+        margin-top: 0.25rem !important;
+        width: 150px !important;
+        padding: 0.45rem 0 !important;
+        font-size: 0.65rem !important;
+      }
+    }
 
     /* ── SECTIONS GENERAL ── */
     section { padding: 7rem 4rem; }
@@ -567,7 +603,7 @@
       display: none;
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(10,10,10,0.98);
+      background: rgba(0,0,0,0.98);
       z-index: 99;
       flex-direction: column;
       align-items: center;
@@ -607,7 +643,7 @@
       #langDropdown { display: none; }
 
       /* HERO */
-      .hero-content { left: 1.2rem; bottom: 3.5rem; }
+      .hero-content { left: 1.2rem; bottom: 7rem; }
       .hero-content h1 { font-size: clamp(2.4rem, 11vw, 3.5rem); }
       .hero-subtitle { font-size: 0.72rem; letter-spacing: 0.14em; }
       .hero-cta { padding: 0.65rem 1.4rem; font-size: 0.7rem; }
@@ -938,6 +974,7 @@
         <li>
           <a href="#books" data-i18n="nav-books" style="cursor:default;">Bücher</a>
           <div class="nav-dropdown">
+            <a href="#book-cycling-cities">Cycling Cities – eine leise Revolution der Städte</a>
             <a href="#book-gesellschaft">Gesellschaft in Bewegung</a>
             <a href="#book-modern">Modern Cyclists</a>
           </div>
@@ -952,7 +989,7 @@
           <span id="langLabel">DE</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
-        <div id="langMenu" style="display:none;position:absolute;top:calc(100% + 0.5rem);right:0;background:rgba(10,10,10,0.97);border:1px solid var(--border);min-width:110px;z-index:200;">
+        <div id="langMenu" style="display:none;position:absolute;top:calc(100% + 0.5rem);right:0;background:rgba(0,0,0,0.97);border:1px solid var(--border);min-width:110px;z-index:200;">
           <button onclick="setLang('de');toggleLangMenu()" id="langOptDe" style="width:100%;background:transparent;border:none;color:var(--accent);cursor:pointer;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;padding:0.6rem 1rem;display:flex;align-items:center;gap:0.5rem;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color=currentLang==='de'?'var(--accent)':'var(--muted)'">
             <span style="font-size:1rem;">🇩🇪</span> DE
           </button>
@@ -976,14 +1013,28 @@
   <section id="hero">
     <div class="hero-bg" id="heroBg"></div>
     <div class="hero-content">
-      <p class="hero-subtitle" data-i18n="hero-subtitle">Filmemacher &nbsp;·&nbsp; Autor &nbsp;·&nbsp; Keynote Speaker</p>
-      <h1>Ingwar<br>Perowanowitsch</h1>
-      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-        <a href="#films" class="hero-cta" data-i18n="hero-cta">Filme entdecken</a>
-        <a href="#events" class="hero-cta" data-i18n="hero-cta-books">Aktuelle Veranstaltungen</a>
+      <div id="hero-name-wrap" style="margin-left: calc(4rem + 2.5cm); display: inline-flex; flex-direction: column; align-items: center;">
+        <h1 id="hero-name" style="color:#fff; white-space: nowrap;">Mein erstes Buch ist da!</h1>
+        <img src="assets/images/Buchcover.png" alt="Cycling Cities – die leise Revolution der Städte"
+          style="width:clamp(120px,22vw,220px); margin: 1.2rem 0; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6)); pointer-events:none;" />
+        <a id="hero-preorder-btn" href="https://www.leykamverlag.at/produkt/cycling-cities/" target="_blank" rel="noopener noreferrer"
+          style="border: 1px solid var(--accent); color: var(--accent); text-decoration: none; padding: 0.7rem 0; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; transition: background 0.25s, color 0.25s; margin-top: 0.8rem; width: 200px; text-align: center; display: block;"
+          onmouseover="this.style.background='var(--accent)';this.style.color='var(--bg)'"
+          onmouseout="this.style.background='transparent';this.style.color='var(--accent)'">Vorbestellen</a>
+        <a id="hero-about-btn" href="#books"
+          style="border: 1px solid var(--accent); color: var(--accent); text-decoration: none; padding: 0.7rem 0; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; transition: background 0.25s, color 0.25s; margin-top: 0.6rem; width: 200px; text-align: center; display: block;"
+          onmouseover="this.style.background='var(--accent)';this.style.color='var(--bg)'"
+          onmouseout="this.style.background='transparent';this.style.color='var(--accent)'">Worum geht's?</a>
       </div>
-      <div style="display: flex; gap: 1.5rem; margin-top: 1.5rem;">
+    </div>
+  </section>
 
+  <!-- ── ABOUT ── -->
+  <section id="about">
+    <div class="about-inner">
+    <div class="about-img-wrap">
+      <img src="assets/images/portrait.webp" alt="Ingwar Perowanowitsch – Filmemacher, Autor und Keynote Speaker aus Freiburg" loading="lazy" />
+      <div id="about-social">
         <!-- Instagram -->
         <div style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
           <a href="https://www.instagram.com/ingwar.perowanowitsch/" target="_blank" rel="noopener noreferrer"
@@ -994,7 +1045,6 @@
           </a>
           <span style="font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4);">Instagram</span>
         </div>
-
         <!-- LinkedIn -->
         <div style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
           <a href="https://www.linkedin.com/in/ingwar-perowanowitsch-7a53872b7/" target="_blank" rel="noopener noreferrer"
@@ -1005,7 +1055,6 @@
           </a>
           <span style="font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4);">LinkedIn</span>
         </div>
-
         <!-- YouTube -->
         <div style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
           <a href="https://www.youtube.com/@ingwarpero" target="_blank" rel="noopener noreferrer"
@@ -1019,7 +1068,6 @@
           </a>
           <span style="font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4);">YouTube</span>
         </div>
-
         <!-- Bluesky -->
         <div style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
           <a href="https://bsky.app/profile/ingwarpero.bsky.social" target="_blank" rel="noopener noreferrer"
@@ -1030,16 +1078,7 @@
           </a>
           <span style="font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4);">Bluesky</span>
         </div>
-
       </div>
-    </div>
-  </section>
-
-  <!-- ── ABOUT ── -->
-  <section id="about">
-    <div class="about-inner">
-    <div class="about-img-wrap">
-      <img src="assets/images/portrait.webp" alt="Ingwar Perowanowitsch – Filmemacher, Autor und Keynote Speaker aus Freiburg" loading="lazy" />
     </div>
     <div class="about-text">
       <p class="section-label" data-i18n="about-label">Über mich</p>
@@ -1301,17 +1340,26 @@
     <!-- Buch 0: Cycling Cities -->
     <div id="book-cycling-cities" style="display:flex; gap:4rem; align-items:flex-start; margin-top:3rem; padding-left:8rem;">
       <!-- Cover -->
-      <div style="flex-shrink:0;">
-        <img src="assets/images/cycling-cities-book.svg"
-             alt="Cycling Cities – Buch von Ingwar Perowanowitsch über europäische Fahrradstädte (erscheint 2026)"
-             style="width:380px;height:507px;object-fit:cover;display:block;">
+      <div style="flex-shrink:0; display:flex; flex-direction:column; align-items:center; gap:1.2rem;">
+        <img src="assets/images/Buchcover.webp"
+             alt="Cycling Cities – eine leise Revolution der Städte – Buch von Ingwar Perowanowitsch (erscheint 2026)"
+             style="width:300px;height:auto;display:block;">
+        <a href="https://www.leykamverlag.at/produkt/cycling-cities/" target="_blank" rel="noopener noreferrer"
+          style="border: 1px solid var(--accent); color: var(--accent); text-decoration: none; padding: 0.7rem 0; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; transition: background 0.25s, color 0.25s; width: 240px; text-align: center; display: block;"
+          onmouseover="this.style.background='var(--accent)';this.style.color='var(--bg)'"
+          onmouseout="this.style.background='transparent';this.style.color='var(--accent)'">Jetzt vorbestellen</a>
       </div>
       <!-- Text -->
       <div style="max-width:540px; padding-top:0.5rem;">
-        <h3 style="font-size:1.4rem; font-weight:600; letter-spacing:0.04em; margin-bottom:1.4rem; color:var(--fg);">Cycling Cities <span style="font-weight:400; opacity:0.6;">(2026)</span></h3>
+        <h3 style="font-size:1.4rem; font-weight:600; letter-spacing:0.04em; margin-bottom:0.4rem; color:var(--fg);">Cycling Cities <span style="font-weight:400; opacity:0.6;">(2026)</span></h3>
+        <p style="font-size:0.95rem; font-style:italic; color:var(--muted); margin-bottom:1rem; letter-spacing:0.02em;">Die leise Revolution der Städte</p>
         <p style="color:var(--muted); font-size:0.95rem; line-height:1.9;">
-          Weitere Infos folgen
+          Mein allererstes Buch ist da! Ein Jahrzehnt nach meinem Erstkontakt mit einer Fahrradstadt ist dieses Buch eine Zusammenfassung meiner bisherigen Erkenntnisse. Es ist ein Rückblick, eine Bestandsaufnahme und ein Ausblick in die Zukunft. Ich möchte wissen: Was ist eigentlich das moralische Dilemma der autogerechten Stadt? Warum ist Deutschland so autozentriert? Warum ist das Fahrrad die Antwort auf all unsere ökologischen Probleme und wie wird die Verkehrswende in anderen europäischen Städten umgesetzt? Das Buch ist eine neue Geschichte des Fahrrads, es ist eine Reise zu den Schauplätzen der Verkehrswende und am Ende ist es auch eine ganz persönliche Liebeserklärung an ein wundervolles Verkehrsmittel, das uns seit über 200 Jahren begleitet und derzeit eine so schöne und kraftvolle Renaissance erlebt.
         </p>
+        <p style="color:var(--muted); font-size:0.95rem; line-height:1.9; margin-top:1rem;">
+          Ich hoffe sehr, dass euch das Buch gefällt. 🙏❤️
+        </p>
+        <p style="color:var(--accent);font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;margin-top:2rem;">Sachbuch &nbsp;·&nbsp; September 2026</p>
       </div>
     </div>
 
@@ -1468,7 +1516,7 @@
         </li>
         <li style="display: grid; grid-template-columns: 6rem 1fr; gap: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.9rem;">
           <span style="color: var(--accent); font-size: 0.85rem; font-weight: 500; white-space: nowrap;">06.05.</span>
-          <span style="color: var(--muted); font-size: 0.9rem; line-height: 1.6;"><strong style="color: var(--text);">Essen</strong> &nbsp;·&nbsp; Weitere Infos folgen</span>
+          <span style="color: var(--muted); font-size: 0.9rem; line-height: 1.6;"><strong style="color: var(--text);">Essen</strong> &nbsp;·&nbsp; Filmvorführung &nbsp;·&nbsp; <a href="https://www.google.com/maps/search/Astra+Theater+Teichstraße+2+45127+Essen" target="_blank" style="color: var(--muted); text-decoration: underline;">Astra Theater, Teichstraße 2</a> &nbsp;·&nbsp; 18:00 – 21:00 Uhr</span>
         </li>
         <li style="display: grid; grid-template-columns: 6rem 1fr; gap: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.9rem;">
           <span style="color: var(--accent); font-size: 0.85rem; font-weight: 500; white-space: nowrap;">07.05.</span>
@@ -1476,7 +1524,7 @@
         </li>
         <li style="display: grid; grid-template-columns: 6rem 1fr; gap: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.9rem;">
           <span style="color: var(--accent); font-size: 0.85rem; font-weight: 500; white-space: nowrap;">08.05.</span>
-          <span style="color: var(--muted); font-size: 0.9rem; line-height: 1.6;"><strong style="color: var(--text);">Oldenburg (Holstein)</strong> &nbsp;·&nbsp; Weitere Infos folgen</span>
+          <span style="color: var(--muted); font-size: 0.9rem; line-height: 1.6;"><strong style="color: var(--text);">Oldenburg (Holstein)</strong> &nbsp;·&nbsp; Filmvorführung &nbsp;·&nbsp; <a href="https://www.google.com/maps/search/Stadtheater+Oldenburg+Holstein" target="_blank" style="color: var(--muted); text-decoration: underline;">Stadtheater</a> &nbsp;·&nbsp; 18:00 Uhr</span>
         </li>
         <li style="display: grid; grid-template-columns: 6rem 1fr; gap: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.9rem;">
           <span style="color: var(--accent); font-size: 0.85rem; font-weight: 500; white-space: nowrap;">12.05.</span>
@@ -1908,6 +1956,56 @@
         btn.disabled = false;
       }
     });
+  </script>
+
+  <script>
+    /* Auto-hide past events */
+    (function () {
+      const monthMap = {
+        'Januar': 1, 'Februar': 2, 'März': 3, 'April': 4, 'Mai': 5, 'Juni': 6,
+        'Juli': 7, 'August': 8, 'September': 9, 'Oktober': 10, 'November': 11, 'Dezember': 12
+      };
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      const section = document.getElementById('events');
+      if (!section) return;
+
+      section.querySelectorAll('h3').forEach(function (h3) {
+        const monthNum = monthMap[h3.textContent.trim()];
+        if (!monthNum) return;
+
+        // If month is already past this year, assume next year; otherwise current year
+        const year = (monthNum < today.getMonth() + 1)
+          ? today.getFullYear() + 1
+          : today.getFullYear();
+
+        // Find the immediately following <ul>
+        let ul = h3.nextElementSibling;
+        while (ul && ul.tagName !== 'UL') ul = ul.nextElementSibling;
+        if (!ul) return;
+
+        let visibleCount = 0;
+        ul.querySelectorAll('li').forEach(function (li) {
+          const span = li.querySelector('span');
+          if (!span) return;
+          const parts = span.textContent.trim().replace(/\.$/, '').split('.');
+          if (parts.length < 2) return;
+          const eventDate = new Date(year, parseInt(parts[1], 10) - 1, parseInt(parts[0], 10));
+          if (eventDate < today) {
+            li.style.display = 'none';
+          } else {
+            visibleCount++;
+          }
+        });
+
+        // Hide the whole month block if no events remain
+        if (visibleCount === 0) {
+          h3.style.display = 'none';
+          ul.style.display = 'none';
+        }
+      });
+    })();
   </script>
 </body>
 </html>
