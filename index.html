@@ -523,9 +523,53 @@
       border: 1px solid rgba(200,184,130,0.3);
     }
 
+    /* ── IMPRESSUM ── */
+    #impressum {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 3rem 4rem;
+    }
+    .impressum-inner { max-width: 760px; margin: 0 auto; }
+    .impressum-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .impressum-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem 3rem;
+    }
+    .impressum-block h3 {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.45rem;
+      font-weight: 600;
+    }
+    .impressum-block p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+    .impressum-block a { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+    .impressum-block a:hover { color: var(--text); }
+    .impressum-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+    .impressum-disclaimer { font-size: 0.75rem; color: #555; line-height: 1.65; }
+
     /* ── FOOTER ── */
     footer {
       background: var(--bg2);
+      border-top: 1px solid var(--border);
       padding: 2.5rem 4rem;
       display: flex;
       align-items: center;
@@ -533,6 +577,8 @@
     }
     .footer-name { font-family: 'Cormorant Garamond', serif; font-size: 1rem; letter-spacing: 0.08em; color: var(--muted); }
     .footer-copy { font-size: 0.72rem; color: #444; letter-spacing: 0.1em; }
+    .footer-impressum-link { font-size: 0.72rem; color: #555; letter-spacing: 0.08em; text-decoration: none; }
+    .footer-impressum-link:hover { color: var(--muted); }
 
     /* ── LIGHTBOX ── */
     .lightbox {
@@ -565,6 +611,8 @@
       #contact { grid-template-columns: 1fr; gap: 3rem; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; }
       .form-row { grid-template-columns: 1fr; }
+      #impressum { padding: 2.5rem 1.5rem; }
+      .impressum-grid { grid-template-columns: 1fr; gap: 1.5rem; }
     }
     @media (max-width: 560px) {
       .nav-links { display: none; }
@@ -1601,9 +1649,61 @@
     </div>
   </section>
 
+  <!-- ── IMPRESSUM ── -->
+  <section id="impressum">
+    <div class="impressum-inner">
+      <p class="impressum-title">Impressum</p>
+
+      <div class="impressum-grid">
+        <div class="impressum-block">
+          <h3>Angaben gemäß § 5 TMG</h3>
+          <p>
+            Ingwar Perowanowitsch<br>
+            Postfach 12 03<br>
+            79245 Merzhausen
+          </p>
+        </div>
+        <div class="impressum-block">
+          <h3>Kontakt</h3>
+          <p>
+            E-Mail: <a href="mailto:ingwarpero@posteo.net">ingwarpero@posteo.net</a><br>
+            Web: <a href="https://ingwarpero.de">ingwarpero.de</a>
+          </p>
+        </div>
+      </div>
+
+      <hr class="impressum-divider">
+
+      <div class="impressum-grid">
+        <div class="impressum-block">
+          <h3>Haftung für Inhalte</h3>
+          <p class="impressum-disclaimer">
+            Die Inhalte dieser Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte kann jedoch keine Gewähr übernommen werden. Als Diensteanbieter bin ich gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG bin ich als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen.
+          </p>
+        </div>
+        <div class="impressum-block">
+          <h3>Haftung für Links</h3>
+          <p class="impressum-disclaimer">
+            Diese Website enthält Links zu externen Webseiten Dritter, auf deren Inhalte ich keinen Einfluss habe. Deshalb kann ich für diese fremden Inhalte keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft.
+          </p>
+        </div>
+      </div>
+
+      <hr class="impressum-divider">
+
+      <div class="impressum-block">
+        <h3>Urheberrecht</h3>
+        <p class="impressum-disclaimer">
+          Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitte ich um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werde ich derartige Inhalte umgehend entfernen.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- ── FOOTER ── -->
   <footer>
     <span class="footer-name">Ingwar Perowanowitsch</span>
+    <a href="#impressum" class="footer-impressum-link">Impressum</a>
     <span class="footer-copy">&copy; 2026 &nbsp;·&nbsp; <span data-i18n="footer-copy">Alle Rechte vorbehalten</span></span>
   </footer>
 
