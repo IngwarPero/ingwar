@@ -543,6 +543,9 @@
       grid-template-columns: 1fr 1fr;
       gap: 2rem 3rem;
     }
+    .impressum-grid-3 {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
     .impressum-block h3 {
       font-size: 0.65rem;
       letter-spacing: 0.14em;
@@ -612,7 +615,7 @@
       footer { flex-direction: column; gap: 0.5rem; text-align: center; }
       .form-row { grid-template-columns: 1fr; }
       #impressum { padding: 2.5rem 1.5rem; }
-      .impressum-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .impressum-grid, .impressum-grid-3 { grid-template-columns: 1fr; gap: 1.5rem; }
     }
     @media (max-width: 560px) {
       .nav-links { display: none; }
@@ -1654,27 +1657,7 @@
     <div class="impressum-inner">
       <p class="impressum-title">Impressum</p>
 
-      <div class="impressum-grid">
-        <div class="impressum-block">
-          <h3>Angaben gemäß § 5 TMG</h3>
-          <p>
-            Ingwar Perowanowitsch<br>
-            Postfach 12 03<br>
-            79245 Merzhausen
-          </p>
-        </div>
-        <div class="impressum-block">
-          <h3>Kontakt</h3>
-          <p>
-            E-Mail: <a href="mailto:ingwarpero@posteo.net">ingwarpero@posteo.net</a><br>
-            Web: <a href="https://ingwarpero.de">ingwarpero.de</a>
-          </p>
-        </div>
-      </div>
-
-      <hr class="impressum-divider">
-
-      <div class="impressum-grid">
+      <div class="impressum-grid impressum-grid-3">
         <div class="impressum-block">
           <h3>Haftung für Inhalte</h3>
           <p class="impressum-disclaimer">
@@ -1687,15 +1670,14 @@
             Diese Website enthält Links zu externen Webseiten Dritter, auf deren Inhalte ich keinen Einfluss habe. Deshalb kann ich für diese fremden Inhalte keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft.
           </p>
         </div>
-      </div>
-
-      <hr class="impressum-divider">
-
-      <div class="impressum-block">
-        <h3>Urheberrecht</h3>
-        <p class="impressum-disclaimer">
-          Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitte ich um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werde ich derartige Inhalte umgehend entfernen.
-        </p>
+        <div class="impressum-block">
+          <h3>Angaben gemäß § 5 TMG</h3>
+          <p>
+            Ingwar Perowanowitsch<br>
+            Postfach 12 03<br>
+            79245 Merzhausen
+          </p>
+        </div>
       </div>
     </div>
   </section>
