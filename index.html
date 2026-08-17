@@ -313,8 +313,7 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: url('assets/images/cover-website.jpg') center 30%/cover no-repeat;
-      transform: scale(1.04);
+      background: url('assets/images/cover-website.jpg') center center/contain no-repeat;
     }
     .hero-bg::after {
       content: '';
@@ -1071,7 +1070,7 @@
         <a id="hero-preorder-btn" href="https://shop.autorenwelt.de/products/cycling-cities-die-leise-revolution-der-stadte-von-ingwar-perowanowitsch" target="_blank" rel="noopener noreferrer"
           style="border: 1px solid var(--accent); color: var(--accent); text-decoration: none; padding: 0.7rem 0; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; transition: background 0.25s, color 0.25s; margin-top: 0.8rem; width: 200px; text-align: center; display: block;"
           onmouseover="this.style.background='var(--accent)';this.style.color='var(--bg)'"
-          onmouseout="this.style.background='transparent';this.style.color='var(--accent)'" data-i18n="hero-preorder">Jetzt signiertes<br>Buch vorbestellen</a>
+          onmouseout="this.style.background='transparent';this.style.color='var(--accent)'" data-i18n="hero-preorder">Jetzt vorbestellen!</a>
         <a id="hero-about-btn" href="#books"
           style="border: 1px solid var(--accent); color: var(--accent); text-decoration: none; padding: 0.7rem 0; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; transition: background 0.25s, color 0.25s; margin-top: 0.6rem; width: 200px; text-align: center; display: block;"
           onmouseover="this.style.background='var(--accent)';this.style.color='var(--bg)'"
@@ -1398,7 +1397,7 @@
         <a href="https://shop.autorenwelt.de/products/cycling-cities-die-leise-revolution-der-stadte-von-ingwar-perowanowitsch" target="_blank" rel="noopener noreferrer"
           style="border: 1px solid var(--accent); color: var(--accent); text-decoration: none; padding: 0.7rem 0; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; transition: background 0.25s, color 0.25s; width: 240px; text-align: center; display: block;"
           onmouseover="this.style.background='var(--accent)';this.style.color='var(--bg)'"
-          onmouseout="this.style.background='transparent';this.style.color='var(--accent)'" data-i18n="book-cc-cta">Jetzt signiertes<br>Buch vorbestellen</a>
+          onmouseout="this.style.background='transparent';this.style.color='var(--accent)'" data-i18n="book-cc-cta">Jetzt vorbestellen!</a>
       </div>
       <!-- Text -->
       <div style="max-width:540px; padding-top:0.5rem;">
@@ -1757,9 +1756,9 @@
         'book-cc-p1':       'Mein allererstes Buch ist da! Ein Jahrzehnt nach meinem Erstkontakt mit einer Fahrradstadt ist dieses Buch eine Zusammenfassung meiner bisherigen Erkenntnisse. Es ist ein Rückblick, eine Bestandsaufnahme und ein Ausblick in die Zukunft. Ich möchte wissen: Was ist eigentlich das moralische Dilemma der autogerechten Stadt? Warum ist Deutschland so autozentriert? Warum ist das Fahrrad die Antwort auf all unsere ökologischen Probleme und wie wird die Verkehrswende in anderen europäischen Städten umgesetzt? Das Buch ist eine neue Geschichte des Fahrrads, es ist eine Reise zu den Schauplätzen der Verkehrswende und am Ende ist es auch eine ganz persönliche Liebeserklärung an ein wundervolles Verkehrsmittel, das uns seit über 200 Jahren begleitet und derzeit eine so schöne und kraftvolle Renaissance erlebt.',
         'book-cc-p2':       'Ich hoffe sehr, dass euch das Buch gefällt. 🙏❤️',
         'book-cc-meta':     'Sachbuch &nbsp;·&nbsp; September 2026',
-        'book-cc-cta':      'Jetzt signiertes<br>Buch vorbestellen',
+        'book-cc-cta':      'Jetzt vorbestellen!',
         'hero-book-launch': 'Mein erstes Buch ist da!',
-        'hero-preorder':    'Jetzt signiertes<br>Buch vorbestellen',
+        'hero-preorder':    'Jetzt vorbestellen!',
         'hero-about':       'Worum geht\'s?',
         'talks-label':      'Keynotes &amp; Vorträge',
         'talks-title':      'Vorträge',
@@ -1839,9 +1838,9 @@
         'book-cc-p1':       'My very first book is here! A decade after my first encounter with a bicycle-friendly city, this book is a summary of everything I have learned so far. It is a retrospective, a stocktaking and a look into the future. I want to know: What is the moral dilemma of the car-centric city? Why is Germany so car-centred? Why is the bicycle the answer to all our ecological problems, and how is the mobility transition being implemented in other European cities? The book is a new history of the bicycle, a journey to the sites of the mobility transition, and in the end also a very personal declaration of love for a wonderful means of transport that has been with us for over 200 years and is currently experiencing such a beautiful and powerful renaissance.',
         'book-cc-p2':       'I truly hope you enjoy the book. 🙏❤️',
         'book-cc-meta':     'Non-fiction &nbsp;·&nbsp; September 2026',
-        'book-cc-cta':      'Pre-order a signed copy now',
+        'book-cc-cta':      'Pre-order now!',
         'hero-book-launch': 'My first book is here!',
-        'hero-preorder':    'Pre-order a signed copy now',
+        'hero-preorder':    'Pre-order now!',
         'hero-about':       'What\'s it about?',
         'talks-label':      'Keynotes &amp; Talks',
         'talks-title':      'Talks',
@@ -1921,9 +1920,9 @@
         'book-cc-p1':       'Mon tout premier livre est là ! Dix ans après ma première rencontre avec une ville adaptée au vélo, ce livre est la synthèse de tout ce que j\'ai appris jusqu\'à présent. C\'est un bilan, un état des lieux et une projection vers l\'avenir. Je veux savoir : quel est le dilemme moral de la ville conçue pour la voiture ? Pourquoi l\'Allemagne est-elle si centrée sur l\'automobile ? Pourquoi le vélo est-il la réponse à tous nos problèmes écologiques et comment la transition de mobilité est-elle mise en œuvre dans d\'autres villes européennes ? Le livre est une nouvelle histoire du vélo, un voyage sur les lieux de la transition de mobilité et, au bout du compte, une déclaration d\'amour très personnelle à un merveilleux moyen de transport qui nous accompagne depuis plus de 200 ans et connaît en ce moment une renaissance si belle et si puissante.',
         'book-cc-p2':       'J\'espère sincèrement que ce livre vous plaira. 🙏❤️',
         'book-cc-meta':     'Essai &nbsp;·&nbsp; Septembre 2026',
-        'book-cc-cta':      'Précommander un livre dédicacé',
+        'book-cc-cta':      'Précommander maintenant !',
         'hero-book-launch': 'Mon premier livre est là !',
-        'hero-preorder':    'Précommander un livre dédicacé',
+        'hero-preorder':    'Précommander maintenant !',
         'hero-about':       'De quoi s\'agit-il ?',
         'talks-label':      'Keynotes &amp; Conférences',
         'talks-title':      'Conférences',
