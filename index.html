@@ -313,7 +313,7 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: url('assets/images/cover-website.jpg') center center/contain no-repeat;
+      background: url('assets/images/cover-website.jpg') center bottom/cover no-repeat;
     }
     .hero-bg::after {
       content: '';
@@ -340,7 +340,7 @@
     }
     .hero-content h1 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.5rem, 4.2vw, 3rem);
+      font-size: clamp(1.1rem, 3vw, 2rem);
       font-weight: 300;
       line-height: 1.05;
       letter-spacing: -0.01em;
@@ -1063,16 +1063,16 @@
   <section id="hero">
     <div class="hero-bg" id="heroBg"></div>
     <div class="hero-content">
-      <div id="hero-name-wrap" style="margin-left: calc(4rem + 2.5cm); display: inline-flex; flex-direction: column; align-items: center;">
+      <div id="hero-name-wrap" style="margin-left: calc(2.5rem + 1cm); display: inline-flex; flex-direction: column; align-items: center;">
         <h1 id="hero-name" style="color:#fff; white-space: nowrap;" data-i18n="hero-book-launch">Mein erstes Buch ist da!</h1>
         <img src="assets/images/Buchcover-v2.webp" alt="Cycling Cities – die leise Revolution der Städte"
-          style="width:clamp(120px,22vw,220px); margin: 1.2rem 0; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6)); pointer-events:none;" />
+          style="width:clamp(80px,15vw,150px); margin: 1rem 0; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6)); pointer-events:none;" />
         <a id="hero-preorder-btn" href="https://shop.autorenwelt.de/products/cycling-cities-die-leise-revolution-der-stadte-von-ingwar-perowanowitsch" target="_blank" rel="noopener noreferrer"
-          style="border: 1px solid var(--accent); color: var(--accent); text-decoration: none; padding: 0.7rem 0; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; transition: background 0.25s, color 0.25s; margin-top: 0.8rem; width: 200px; text-align: center; display: block;"
+          style="border: 1px solid var(--accent); color: var(--accent); text-decoration: none; padding: 0.6rem 0; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; transition: background 0.25s, color 0.25s; margin-top: 0.7rem; width: 160px; text-align: center; display: block;"
           onmouseover="this.style.background='var(--accent)';this.style.color='var(--bg)'"
           onmouseout="this.style.background='transparent';this.style.color='var(--accent)'" data-i18n="hero-preorder">Jetzt vorbestellen!</a>
         <a id="hero-about-btn" href="#books"
-          style="border: 1px solid var(--accent); color: var(--accent); text-decoration: none; padding: 0.7rem 0; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; transition: background 0.25s, color 0.25s; margin-top: 0.6rem; width: 200px; text-align: center; display: block;"
+          style="border: 1px solid var(--accent); color: var(--accent); text-decoration: none; padding: 0.6rem 0; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; transition: background 0.25s, color 0.25s; margin-top: 0.5rem; width: 160px; text-align: center; display: block;"
           onmouseover="this.style.background='var(--accent)';this.style.color='var(--bg)'"
           onmouseout="this.style.background='transparent';this.style.color='var(--accent)'" data-i18n="hero-about">Worum geht's?</a>
       </div>
