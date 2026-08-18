@@ -158,7 +158,7 @@
         "name": "Was ist der Film Die Große Transformation?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Die Große Transformation ist ein geplanter 90-minütiger Dokumentarfilm von Ingwar Perowanowitsch, der 2027 in die Kinos kommen soll. Der Film beleuchtet den aktuellen Stand der ökologischen Transformation in Deutschland und Europa – zehn Jahre nach der Gründung von Fridays for Future."
+          "text": "Die Große Transformation ist ein geplanter 100-minütiger Dokumentarfilm von Ingwar Perowanowitsch, der 2028 in die Kinos kommen soll. Der Film beleuchtet den aktuellen Stand der ökologischen Transformation in Deutschland und Europa – zehn Jahre nach der Gründung von Fridays for Future."
         }
       }
     ]
@@ -321,15 +321,15 @@
       inset: 0;
       background: linear-gradient(
         to bottom,
-        rgba(0,0,0,0.25) 0%,
-        rgba(0,0,0,0.15) 40%,
-        rgba(0,0,0,0.75) 80%,
-        rgba(0,0,0,1) 100%
+        rgba(0,0,0,0.12) 0%,
+        rgba(0,0,0,0.05) 45%,
+        rgba(0,0,0,0.45) 82%,
+        rgba(0,0,0,0.98) 100%
       );
     }
     .hero-content {
       position: absolute;
-      bottom: 6rem;
+      bottom: 7.5rem;
       left: 0;
       right: 0;
       z-index: 2;
@@ -369,8 +369,8 @@
     #about-social {
       display: flex;
       gap: 1.5rem;
-      margin-top: 1.5rem;
-      justify-content: center;
+      margin-top: 2.5rem;
+      justify-content: flex-start;
     }
     @media (max-width: 768px) {
       #hero-name { display: none; }
@@ -383,7 +383,7 @@
         margin-top: 2.5rem !important;
         margin-bottom: 0.3rem !important;
       }
-      #about-social { display: none; }
+      #about-social { flex-wrap: wrap; gap: 1.1rem; margin-top: 2rem; }
       #hero-preorder-btn {
         margin-top: 0.3rem !important;
         width: 150px !important;
@@ -418,29 +418,78 @@
 
     /* ── ABOUT ── */
     #about {
+      position: relative;
       background: var(--bg2);
       padding: 0;
-    }
-    .about-inner {
+      min-height: 100vh;
       display: flex;
-      padding-left: 12rem;
       align-items: center;
+      overflow: hidden;
     }
-    .about-img-wrap { position: relative; display: inline-block; flex-shrink: 0; }
-    .about-img-wrap img {
-      width: 380px;
-      height: 507px;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
-      filter: grayscale(20%);
+    .about-bg {
+      position: absolute;
+      inset: 0;
+      background: url('assets/images/ueber-mich.jpg') center center/cover no-repeat;
     }
-    .about-text {
-      padding: 5rem 4rem;
-      flex: 1;
+    /* Vignette links, damit der Text lesbar bleibt */
+    .about-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(0,0,0,0.92) 0%,
+        rgba(0,0,0,0.82) 30%,
+        rgba(0,0,0,0.5) 55%,
+        rgba(0,0,0,0.12) 78%,
+        rgba(0,0,0,0) 100%
+      );
     }
-    .about-text p { color: var(--muted); font-size: 1rem; line-height: 1.9; margin-bottom: 1.5rem; }
-    .about-text p:first-of-type { color: var(--text); font-size: 1.1rem; }
+    .about-content {
+      position: relative;
+      z-index: 2;
+      max-width: 620px;
+      padding: 5rem 3rem 5rem 8rem;
+    }
+    .about-content p { color: rgba(240,237,232,0.82); font-size: 1rem; line-height: 1.9; margin-bottom: 1.5rem; }
+    .about-content p:first-of-type { color: var(--text); font-size: 1.1rem; }
+
+    /* ── DIE GROSSE TRANSFORMATION ── */
+    #film-transformation {
+      position: relative;
+      background: #000;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .dgt-bg {
+      position: absolute;
+      inset: 0;
+      background: url('assets/images/dgt-vollbild.jpg') center center/cover no-repeat;
+    }
+    /* Vignette links, damit der Text lesbar bleibt */
+    .dgt-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(0,0,0,0.92) 0%,
+        rgba(0,0,0,0.82) 30%,
+        rgba(0,0,0,0.5) 55%,
+        rgba(0,0,0,0.12) 78%,
+        rgba(0,0,0,0) 100%
+      );
+    }
+    .dgt-content {
+      position: relative;
+      z-index: 2;
+      max-width: 660px;
+      padding: 5rem 3rem 5rem 8rem;
+    }
+
     .tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
     .tag {
       border: 1px solid var(--border);
@@ -609,7 +658,7 @@
       nav { padding: 1.2rem 2rem; }
       section { padding: 5rem 2rem; }
       .hero-content { left: 2rem; bottom: 4rem; }
-      .about-inner { flex-direction: column; padding-left: 2rem; padding-right: 2rem; } .about-text { padding: 2rem 0; }
+      .about-content, .dgt-content { padding: 4rem 2rem; }
       #contact { grid-template-columns: 1fr; gap: 3rem; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; }
       .form-row { grid-template-columns: 1fr; }
@@ -701,22 +750,21 @@
       /* SECTIONS */
       section { padding: 3.5rem 1.2rem; }
 
-      /* ABOUT */
-      .about-inner {
-        flex-direction: column !important;
-        padding-left: 0 !important;
-        padding-right: 0 !important;
+      /* ABOUT + DIE GROSSE TRANSFORMATION */
+      .about-content,
+      #film-transformation .dgt-content { padding: 3.5rem 1.2rem !important; max-width: none !important; }
+      /* Auf schmalen Schirmen den Text über die ganze Breite abdunkeln */
+      .about-bg::after,
+      .dgt-bg::after {
+        background: linear-gradient(
+          to right,
+          rgba(0,0,0,0.9) 0%,
+          rgba(0,0,0,0.82) 60%,
+          rgba(0,0,0,0.7) 100%
+        ) !important;
       }
-      .about-img-wrap img {
-        width: 100% !important;
-        height: auto !important;
-        max-height: 420px;
-        object-fit: cover;
-      }
-      .about-text { padding: 1.8rem 1.2rem !important; }
 
       /* FILM SECTIONS — remove the large left padding and switch to column */
-      #film-transformation > div,
       #films > div,
       #film-baku > div,
       #production > div,
@@ -726,7 +774,6 @@
       }
 
       /* Fixed-size film/book images — make fluid */
-      #film-transformation img,
       #film-baku img,
       #production img,
       #talks img {
@@ -766,7 +813,6 @@
       }
 
       /* Film text panels */
-      #film-transformation > div > div:last-child,
       #films > div > div:last-child,
       #film-baku > div > div:last-child,
       #production > div > div:last-child,
@@ -833,29 +879,14 @@
         background-position: 65% center !important;
       }
 
-      /* ── ABOUT: Bild ohne Abschneidung ── */
-      .about-img-wrap {
-        width: 100% !important;
-      }
-      .about-img-wrap img {
-        max-height: none !important;
-        height: auto !important;
-        width: 100% !important;
-        object-fit: contain !important;
-        object-position: center top !important;
+      /* ── ABOUT: Bildausschnitt auf Mobile ── */
+      .about-bg {
+        background-position: 60% center !important;
       }
 
-      /* ── FILM-TRANSFORMATION: Bild-Container auf volle Breite ── */
-      #film-transformation > div > div:first-child {
-        width: 100% !important;
-        flex-shrink: unset !important;
-        justify-content: center !important;
-      }
-      #film-transformation > div > div:first-child img {
-        width: 100% !important;
-        height: auto !important;
-        max-height: none !important;
-        object-fit: contain !important;
+      /* ── FILM-TRANSFORMATION: Bildausschnitt auf Mobile ── */
+      .dgt-bg {
+        background-position: 60% center !important;
       }
 
       /* ── CYCLING CITIES CAROUSEL: vollständige Hochformat-Anzeige ── */
@@ -1081,9 +1112,20 @@
 
   <!-- ── ABOUT ── -->
   <section id="about">
-    <div class="about-inner">
-    <div class="about-img-wrap">
-      <img src="assets/images/portrait.webp" alt="Ingwar Perowanowitsch – Filmemacher, Autor und Keynote Speaker aus Freiburg" loading="lazy" />
+    <div class="about-bg"></div>
+    <div class="about-content">
+      <p class="section-label" data-i18n="about-label">Über mich</p>
+      <div class="divider"></div>
+      <h2 data-i18n="about-heading">Geschichten des Gelingens</h2>
+      <p data-i18n="about-p1">Seit meinem Studium in Groningen in den Niederlanden bin ich von der „fahrradgerechten Stadt" fasziniert. Die einzigartige niederländische Fahrradkultur hat mich inspiriert auch in Deutschland die Vorstellungskraft der Menschen zu wecken und mit Bildern und Geschichten aufzuzeigen, wie eine Stadt, die nicht für Autos, sondern für Menschen gestaltet ist, aussehen könnte.</p>
+      <p data-i18n="about-p2">Dazu schreibe ich Artikel und Bücher, halte Vorträge und mache Filme über die vielen kleinen und großen Geschichten des Gelingens, die einen so wichtigen Beitrag zur ökologischen Transformation leisten. Denn am Ende geht es nicht ums Fahrrad allein. Es geht darum, eine lebenswerte, gerechte und nachhaltige Welt für alle Menschen zu schaffen.</p>
+      <div class="tags">
+        <span class="tag" data-i18n="tag-doc">Dokumentarfilm</span>
+        <span class="tag" data-i18n="tag-journ">Journalismus</span>
+        <span class="tag">Keynote</span>
+        <span class="tag" data-i18n="tag-mobility">Urbane Mobilität</span>
+        <span class="tag" data-i18n="tag-cycling">Fahrradstädte</span>
+      </div>
       <div id="about-social">
         <!-- Instagram -->
         <div style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
@@ -1130,68 +1172,28 @@
         </div>
       </div>
     </div>
-    <div class="about-text">
-      <p class="section-label" data-i18n="about-label">Über mich</p>
-      <div class="divider"></div>
-      <h2 data-i18n="about-heading">Geschichten des Gelingens</h2>
-      <p data-i18n="about-p1">Seit meinem Studium in Groningen in den Niederlanden bin ich von der „fahrradgerechten Stadt" fasziniert. Die einzigartige niederländische Fahrradkultur hat mich inspiriert auch in Deutschland die Vorstellungskraft der Menschen zu wecken und mit Bildern und Geschichten aufzuzeigen, wie eine Stadt, die nicht für Autos, sondern für Menschen gestaltet ist, aussehen könnte.</p>
-      <p data-i18n="about-p2">Dazu schreibe ich Artikel und Bücher, halte Vorträge und mache Filme über die vielen kleinen und großen Geschichten des Gelingens, die einen so wichtigen Beitrag zur ökologischen Transformation leisten. Denn am Ende geht es nicht ums Fahrrad allein. Es geht darum, eine lebenswerte, gerechte und nachhaltige Welt für alle Menschen zu schaffen.</p>
-      <div class="tags">
-        <span class="tag" data-i18n="tag-doc">Dokumentarfilm</span>
-        <span class="tag" data-i18n="tag-journ">Journalismus</span>
-        <span class="tag">Keynote</span>
-        <span class="tag" data-i18n="tag-mobility">Urbane Mobilität</span>
-        <span class="tag" data-i18n="tag-cycling">Fahrradstädte</span>
-      </div>
-    </div>
-    </div>
   </section>
 
   <!-- ── FILM 1: CYCLING CITIES ── -->
   <!-- ── FILM 1: DIE GROẞE TRANSFORMATION ── -->
-  <section id="film-transformation" style="background: #000; padding: 0;">
-    <div style="display: flex; padding-left: 12rem;">
-      <div style="background: #000; display: flex; align-items: center; justify-content: flex-end; flex-shrink: 0; position: relative;">
-        <img src="assets/images/DGT.webp" alt="Die Große Transformation – Dokumentarfilm von Ingwar Perowanowitsch über ökologische Transformation in Europa (2027)" style="width:380px;height:507px;object-fit:cover;display:block;" />
-        <div style="
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%) rotate(-18deg);
-          border: 4px solid rgba(180, 30, 30, 0.88);
-          border-radius: 6px;
-          padding: 0.55rem 1.4rem;
-          color: rgba(180, 30, 30, 0.88);
-          font-family: 'Courier New', Courier, monospace;
-          font-size: 1.35rem;
-          font-weight: 700;
-          letter-spacing: 0.22em;
-          text-transform: uppercase;
-          white-space: nowrap;
-          pointer-events: none;
-          text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-          box-shadow: inset 0 0 6px rgba(180,30,30,0.15);
-          background: rgba(0,0,0,0.08);
-          user-select: none;
-        ">Coming Soon</div>
-      </div>
-      <div style="padding: 5rem 4.5rem; display:flex; flex-direction:column; justify-content:center; background: var(--bg2);">
-        <p class="section-label" data-i18n="films-label">Filme</p>
-        <div class="divider"></div>
-        <h2 style="margin-bottom: 2rem;" data-i18n="dgt-title">Die Große Transformation (2027)</h2>
-        <p style="color:var(--muted);font-size:0.97rem;line-height:2;max-width:680px;" data-i18n="dgt-p1">Die Große Transformation wird ein 90-minütiger Dokumentarfilm über den aktuellen Zustand der ökologischen Transformation in Deutschland und Europa. Zehn Jahre nach der Gründung von Fridays for Future geht der Film der Frage nach, wie der Weg zur Klimaneutralität bis zur Mitte des 21. Jahrhunderts gelingen kann. Für diesen Film reist der Filmemacher Ingwar Perowanowitsch quer durch Deutschland und Europa, besucht gelungene Projekte, die einen positiven Beitrag zur ökologischen Wende leisten und spricht mit Politikern, Aktivisten und Wissenschaftlern, die sich auf unterschiedlichste Weise auf lokaler, nationaler und internationaler Ebene für die Transformation einsetzen.</p>
-        <p style="color:var(--accent);font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;margin-top:2rem;" data-i18n="dgt-meta">Dokumentarfilm &nbsp;·&nbsp; 2027 &nbsp;·&nbsp; 90 Minuten</p>
-        <div style="display:inline-flex;align-items:center;gap:0.7rem;margin-top:1.8rem;color:var(--text);font-size:0.85rem;letter-spacing:0.08em;border:1px solid var(--border);padding:0.75rem 1.5rem;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
-            <rect x="2" y="8" width="20" height="14" rx="1.5"/>
-            <polyline points="2,12 22,12"/>
-            <polyline points="7,8 5,4"/>
-            <polyline points="13,8 11,4"/>
-            <polyline points="19,8 17,4"/>
-            <line x1="2" y1="4" x2="20" y2="4" stroke-width="2"/>
-          </svg>
-          <span data-i18n="dgt-cinema">Ab 2027 im Kino</span>
-        </div>
+  <section id="film-transformation">
+    <div class="dgt-bg"></div>
+    <div class="dgt-content">
+      <p class="section-label" data-i18n="films-label">Filme</p>
+      <div class="divider"></div>
+      <h2 style="margin-bottom: 2rem; color:#fff;" data-i18n="dgt-title">Die Große Transformation (2028)</h2>
+      <p style="color:rgba(255,255,255,0.9);font-size:0.97rem;line-height:2;" data-i18n="dgt-p1">Die Große Transformation wird ein 100-minütiger Dokumentarfilm über den aktuellen Zustand der ökologischen Transformation in Deutschland und Europa. Zehn Jahre nach der Gründung von Fridays for Future geht der Film der Frage nach, wie der Weg zur Klimaneutralität bis zur Mitte des 21. Jahrhunderts gelingen kann. Für diesen Film reist der Filmemacher Ingwar Perowanowitsch quer durch Deutschland und Europa, besucht gelungene Projekte, die einen positiven Beitrag zur ökologischen Wende leisten und spricht mit Politikern, Aktivisten und Wissenschaftlern, die sich auf unterschiedlichste Weise auf lokaler, nationaler und internationaler Ebene für die Transformation einsetzen.</p>
+      <p style="color:var(--accent);font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;margin-top:2rem;" data-i18n="dgt-meta">Dokumentarfilm &nbsp;·&nbsp; 2028 &nbsp;·&nbsp; 100 Minuten</p>
+      <div style="display:inline-flex;align-items:center;gap:0.7rem;margin-top:1.8rem;color:#fff;font-size:0.85rem;letter-spacing:0.08em;border:1px solid rgba(255,255,255,0.35);padding:0.75rem 1.5rem;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+          <rect x="2" y="8" width="20" height="14" rx="1.5"/>
+          <polyline points="2,12 22,12"/>
+          <polyline points="7,8 5,4"/>
+          <polyline points="13,8 11,4"/>
+          <polyline points="19,8 17,4"/>
+          <line x1="2" y1="4" x2="20" y2="4" stroke-width="2"/>
+        </svg>
+        <span data-i18n="dgt-cinema">Ab 2028 im Kino</span>
       </div>
     </div>
   </section>
@@ -1724,10 +1726,10 @@
         'tag-mobility':     'Urbane Mobilität',
         'tag-cycling':      'Fahrradstädte',
         'films-label':      'Filme',
-        'dgt-title':        'Die Große Transformation (2027)',
-        'dgt-p1':           'Die Große Transformation wird ein 90-minütiger Dokumentarfilm über den aktuellen Zustand der ökologischen Transformation in Deutschland und Europa. Zehn Jahre nach der Gründung von Fridays for Future geht der Film der Frage nach, wie der Weg zur Klimaneutralität bis zur Mitte des 21. Jahrhunderts gelingen kann. Für diesen Film reist der Filmemacher Ingwar Perowanowitsch quer durch Deutschland und Europa, besucht gelungene Projekte, die einen positiven Beitrag zur ökologischen Wende leisten und spricht mit Politikern, Aktivisten und Wissenschaftlern, die sich auf unterschiedlichste Weise auf lokaler, nationaler und internationaler Ebene für die Transformation einsetzen.',
-        'dgt-meta':         'Dokumentarfilm &nbsp;·&nbsp; 2027 &nbsp;·&nbsp; 90 Minuten',
-        'dgt-cinema':       'Ab 2027 im Kino',
+        'dgt-title':        'Die Große Transformation (2028)',
+        'dgt-p1':           'Die Große Transformation wird ein 100-minütiger Dokumentarfilm über den aktuellen Zustand der ökologischen Transformation in Deutschland und Europa. Zehn Jahre nach der Gründung von Fridays for Future geht der Film der Frage nach, wie der Weg zur Klimaneutralität bis zur Mitte des 21. Jahrhunderts gelingen kann. Für diesen Film reist der Filmemacher Ingwar Perowanowitsch quer durch Deutschland und Europa, besucht gelungene Projekte, die einen positiven Beitrag zur ökologischen Wende leisten und spricht mit Politikern, Aktivisten und Wissenschaftlern, die sich auf unterschiedlichste Weise auf lokaler, nationaler und internationaler Ebene für die Transformation einsetzen.',
+        'dgt-meta':         'Dokumentarfilm &nbsp;·&nbsp; 2028 &nbsp;·&nbsp; 100 Minuten',
+        'dgt-cinema':       'Ab 2028 im Kino',
         'cc-title':         'Cycling Cities (2025)',
         'cc-p1':            'Im Mai 2025 bricht der Journalist und Filmemacher Ingwar Perowanowitsch auf eine Radreise zu den schönsten Fahrradstädten Europas auf. Sein Weg führt ihn von Freiburg nach Paris, über Gent, Amsterdam, Utrecht und Hamburg bis nach Kopenhagen. Er möchte wissen: Wie haben diese Städte die Verkehrswende geschafft und was können wir in Deutschland von ihnen lernen?',
         'cc-p2':            'Perowanowitsch dokumentiert mit der Kamera, wie sich die Städte über die letzten Jahre und Jahrzehnte verändert haben, spricht vor Ort mit Politikern, Verkehrsplanern und Aktivisten und erzählt, welche Maßnahmen und Strategien am Ende zum Erfolg geführt haben. Entstanden ist dabei ein bildgewaltiger Film, der eine neue Geschichte der Mobilität erzählt. Ein Film, der inspiriert, zum Nachdenken anregt und dazu einlädt, unsere Städte von Grund auf neu zu denken.',
@@ -1806,10 +1808,10 @@
         'tag-mobility':     'Urban Mobility',
         'tag-cycling':      'Cycling Cities',
         'films-label':      'Films',
-        'dgt-title':        'The Great Transformation (2027)',
-        'dgt-p1':           'The Great Transformation will be a 90-minute documentary about the current state of the ecological transformation in Germany and Europe. Ten years after the founding of Fridays for Future, the film explores how the path to climate neutrality by the middle of the 21st century can be achieved. For this film, filmmaker Ingwar Perowanowitsch travels across Germany and Europe, visiting successful projects that make a positive contribution to the ecological transition and speaking with politicians, activists and scientists who are working in diverse ways at local, national and international levels for the transformation.',
-        'dgt-meta':         'Documentary &nbsp;·&nbsp; 2027 &nbsp;·&nbsp; 90 Minutes',
-        'dgt-cinema':       'Coming to cinemas in 2027',
+        'dgt-title':        'The Great Transformation (2028)',
+        'dgt-p1':           'The Great Transformation will be a 100-minute documentary about the current state of the ecological transformation in Germany and Europe. Ten years after the founding of Fridays for Future, the film explores how the path to climate neutrality by the middle of the 21st century can be achieved. For this film, filmmaker Ingwar Perowanowitsch travels across Germany and Europe, visiting successful projects that make a positive contribution to the ecological transition and speaking with politicians, activists and scientists who are working in diverse ways at local, national and international levels for the transformation.',
+        'dgt-meta':         'Documentary &nbsp;·&nbsp; 2028 &nbsp;·&nbsp; 100 Minutes',
+        'dgt-cinema':       'Coming to cinemas in 2028',
         'cc-title':         'Cycling Cities (2025)',
         'cc-p1':            'In May 2025, journalist and filmmaker Ingwar Perowanowitsch set off on a cycling journey to the most beautiful cycling cities in Europe. His route takes him from Freiburg to Paris, via Ghent, Amsterdam, Utrecht and Hamburg to Copenhagen. He wants to know: How did these cities achieve the mobility transition and what can Germany learn from them?',
         'cc-p2':            'Perowanowitsch documents with his camera how cities have transformed over the years and decades, speaking on location with politicians, urban planners and activists, and telling the story of which measures and strategies ultimately led to success. The result is a visually powerful film that tells a new story of mobility – a film that inspires, provokes thought and invites us to rethink our cities from the ground up.',
@@ -1888,10 +1890,10 @@
         'tag-mobility':     'Mobilité urbaine',
         'tag-cycling':      'Villes cyclables',
         'films-label':      'Films',
-        'dgt-title':        'La Grande Transformation (2027)',
-        'dgt-p1':           'La Grande Transformation sera un documentaire de 90 minutes sur l\'état actuel de la transformation écologique en Allemagne et en Europe. Dix ans après la fondation de Fridays for Future, le film explore comment atteindre la neutralité climatique d\'ici le milieu du XXIe siècle. Pour ce film, le cinéaste Ingwar Perowanowitsch voyage à travers l\'Allemagne et l\'Europe, visite des projets réussis qui contribuent positivement à la transition écologique et s\'entretient avec des politiciens, des militants et des scientifiques qui s\'engagent de diverses manières aux niveaux local, national et international pour la transformation.',
-        'dgt-meta':         'Documentaire &nbsp;·&nbsp; 2027 &nbsp;·&nbsp; 90 minutes',
-        'dgt-cinema':       'Au cinéma en 2027',
+        'dgt-title':        'La Grande Transformation (2028)',
+        'dgt-p1':           'La Grande Transformation sera un documentaire de 100 minutes sur l\'état actuel de la transformation écologique en Allemagne et en Europe. Dix ans après la fondation de Fridays for Future, le film explore comment atteindre la neutralité climatique d\'ici le milieu du XXIe siècle. Pour ce film, le cinéaste Ingwar Perowanowitsch voyage à travers l\'Allemagne et l\'Europe, visite des projets réussis qui contribuent positivement à la transition écologique et s\'entretient avec des politiciens, des militants et des scientifiques qui s\'engagent de diverses manières aux niveaux local, national et international pour la transformation.',
+        'dgt-meta':         'Documentaire &nbsp;·&nbsp; 2028 &nbsp;·&nbsp; 100 minutes',
+        'dgt-cinema':       'Au cinéma en 2028',
         'cc-title':         'Cycling Cities (2025)',
         'cc-p1':            'En mai 2025, le journaliste et cinéaste Ingwar Perowanowitsch part pour un voyage à vélo à travers les plus belles villes cyclables d\'Europe. Son itinéraire le mène de Fribourg à Paris, via Gand, Amsterdam, Utrecht et Hambourg jusqu\'à Copenhague. Il veut savoir : comment ces villes ont-elles réussi leur transition de mobilité et que peut apprendre l\'Allemagne à leur exemple ?',
         'cc-p2':            'Perowanowitsch documente avec sa caméra comment les villes se sont transformées au fil des années et des décennies, s\'entretient sur place avec des politiciens, des urbanistes et des militants, et raconte quelles mesures et stratégies ont finalement mené au succès. Il en résulte un film visuellement puissant qui raconte une nouvelle histoire de la mobilité – un film qui inspire, invite à la réflexion et à repenser nos villes de fond en comble.',
