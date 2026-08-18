@@ -421,18 +421,19 @@
       position: relative;
       background: var(--bg2);
       padding: 0;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       overflow: hidden;
       /* Versatz, damit die fixierte Navigation beim Sprung nichts verdeckt */
       scroll-margin-top: 5.5rem;
     }
-    /* cover = randlos; da die Sektionshöhe fast dem Bildformat entspricht,
-       wird dabei nur ein minimaler Streifen oben/unten beschnitten */
+    /* cover = füllt die Sektion randlos; Position oben, damit ausschließlich
+       unten beschnitten wird und der Kopf immer vollständig im Bild bleibt */
     .about-bg {
       position: absolute;
       inset: 0;
-      background: url('assets/images/ueber-mich.jpg') center center/cover no-repeat;
+      background: url('assets/images/ueber-mich.jpg') center top/cover no-repeat;
     }
     /* Vignette links, damit der Text lesbar bleibt */
     .about-bg::after {
