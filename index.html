@@ -369,7 +369,7 @@
     #about-social {
       display: flex;
       gap: 1.5rem;
-      margin-top: 2.5rem;
+      margin-top: 1rem;
       justify-content: flex-start;
     }
     @media (max-width: 768px) {
@@ -421,15 +421,17 @@
       position: relative;
       background: var(--bg2);
       padding: 0;
-      min-height: 100vh;
       display: flex;
       align-items: center;
       overflow: hidden;
+      /* Versatz, damit die fixierte Navigation beim Sprung nichts verdeckt */
+      scroll-margin-top: 5.5rem;
     }
+    /* contain = das ganze Bild ist sichtbar, nichts wird beschnitten */
     .about-bg {
       position: absolute;
       inset: 0;
-      background: url('assets/images/ueber-mich.jpg') center center/cover no-repeat;
+      background: url('assets/images/ueber-mich.jpg') center center/contain no-repeat;
     }
     /* Vignette links, damit der Text lesbar bleibt */
     .about-bg::after {
@@ -449,10 +451,8 @@
       position: relative;
       z-index: 2;
       max-width: 620px;
-      padding: 5rem 3rem 5rem 8rem;
+      padding: 3.5rem 3rem 3.5rem 8rem;
     }
-    .about-content p { color: rgba(240,237,232,0.82); font-size: 1rem; line-height: 1.9; margin-bottom: 1.5rem; }
-    .about-content p:first-of-type { color: var(--text); font-size: 1.1rem; }
 
     /* ── DIE GROSSE TRANSFORMATION ── */
     #film-transformation {
@@ -463,6 +463,7 @@
       display: flex;
       align-items: center;
       overflow: hidden;
+      scroll-margin-top: 5.5rem;
     }
     .dgt-bg {
       position: absolute;
@@ -486,9 +487,32 @@
     .dgt-content {
       position: relative;
       z-index: 2;
-      max-width: 660px;
-      padding: 5rem 3rem 5rem 8rem;
+      max-width: 620px;
+      padding: 3.5rem 3rem 3.5rem 8rem;
     }
+
+    /* Beide Vollbild-Sektionen teilen sich exakt dieselben Schriftgrößen */
+    .about-content h2,
+    .dgt-content h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      margin-bottom: 1.8rem;
+      color: #fff;
+    }
+    .about-content p,
+    .dgt-content p {
+      font-size: 0.92rem;
+      line-height: 1.85;
+      margin-bottom: 1.2rem;
+      color: rgba(255,255,255,0.88);
+    }
+    .about-content .section-label,
+    .dgt-content .section-label {
+      font-size: 0.72rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .about-content .divider,
+    .dgt-content .divider { margin-bottom: 1.6rem; }
 
     .tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
     .tag {
@@ -1119,13 +1143,6 @@
       <h2 data-i18n="about-heading">Geschichten des Gelingens</h2>
       <p data-i18n="about-p1">Seit meinem Studium in Groningen in den Niederlanden bin ich von der „fahrradgerechten Stadt" fasziniert. Die einzigartige niederländische Fahrradkultur hat mich inspiriert auch in Deutschland die Vorstellungskraft der Menschen zu wecken und mit Bildern und Geschichten aufzuzeigen, wie eine Stadt, die nicht für Autos, sondern für Menschen gestaltet ist, aussehen könnte.</p>
       <p data-i18n="about-p2">Dazu schreibe ich Artikel und Bücher, halte Vorträge und mache Filme über die vielen kleinen und großen Geschichten des Gelingens, die einen so wichtigen Beitrag zur ökologischen Transformation leisten. Denn am Ende geht es nicht ums Fahrrad allein. Es geht darum, eine lebenswerte, gerechte und nachhaltige Welt für alle Menschen zu schaffen.</p>
-      <div class="tags">
-        <span class="tag" data-i18n="tag-doc">Dokumentarfilm</span>
-        <span class="tag" data-i18n="tag-journ">Journalismus</span>
-        <span class="tag">Keynote</span>
-        <span class="tag" data-i18n="tag-mobility">Urbane Mobilität</span>
-        <span class="tag" data-i18n="tag-cycling">Fahrradstädte</span>
-      </div>
       <div id="about-social">
         <!-- Instagram -->
         <div style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
@@ -1181,8 +1198,8 @@
     <div class="dgt-content">
       <p class="section-label" data-i18n="films-label">Filme</p>
       <div class="divider"></div>
-      <h2 style="margin-bottom: 2rem; color:#fff;" data-i18n="dgt-title">Die Große Transformation (2028)</h2>
-      <p style="color:rgba(255,255,255,0.9);font-size:0.97rem;line-height:2;" data-i18n="dgt-p1">Die Große Transformation wird ein 100-minütiger Dokumentarfilm über den aktuellen Zustand der ökologischen Transformation in Deutschland und Europa. Zehn Jahre nach der Gründung von Fridays for Future geht der Film der Frage nach, wie der Weg zur Klimaneutralität bis zur Mitte des 21. Jahrhunderts gelingen kann. Für diesen Film reist der Filmemacher Ingwar Perowanowitsch quer durch Deutschland und Europa, besucht gelungene Projekte, die einen positiven Beitrag zur ökologischen Wende leisten und spricht mit Politikern, Aktivisten und Wissenschaftlern, die sich auf unterschiedlichste Weise auf lokaler, nationaler und internationaler Ebene für die Transformation einsetzen.</p>
+      <h2 data-i18n="dgt-title">Die Große Transformation (2028)</h2>
+      <p data-i18n="dgt-p1">Die Große Transformation wird ein 100-minütiger Dokumentarfilm über den aktuellen Zustand der ökologischen Transformation in Deutschland und Europa. Zehn Jahre nach der Gründung von Fridays for Future geht der Film der Frage nach, wie der Weg zur Klimaneutralität bis zur Mitte des 21. Jahrhunderts gelingen kann. Für diesen Film reist der Filmemacher Ingwar Perowanowitsch quer durch Deutschland und Europa, besucht gelungene Projekte, die einen positiven Beitrag zur ökologischen Wende leisten und spricht mit Politikern, Aktivisten und Wissenschaftlern, die sich auf unterschiedlichste Weise auf lokaler, nationaler und internationaler Ebene für die Transformation einsetzen.</p>
       <p style="color:var(--accent);font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;margin-top:2rem;" data-i18n="dgt-meta">Dokumentarfilm &nbsp;·&nbsp; 2028 &nbsp;·&nbsp; 100 Minuten</p>
       <div style="display:inline-flex;align-items:center;gap:0.7rem;margin-top:1.8rem;color:#fff;font-size:0.85rem;letter-spacing:0.08em;border:1px solid rgba(255,255,255,0.35);padding:0.75rem 1.5rem;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
