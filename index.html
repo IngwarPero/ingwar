@@ -427,11 +427,12 @@
       /* Versatz, damit die fixierte Navigation beim Sprung nichts verdeckt */
       scroll-margin-top: 5.5rem;
     }
-    /* contain = das ganze Bild ist sichtbar, nichts wird beschnitten */
+    /* cover = randlos; da die Sektionshöhe fast dem Bildformat entspricht,
+       wird dabei nur ein minimaler Streifen oben/unten beschnitten */
     .about-bg {
       position: absolute;
       inset: 0;
-      background: url('assets/images/ueber-mich.jpg') center center/contain no-repeat;
+      background: url('assets/images/ueber-mich.jpg') center center/cover no-repeat;
     }
     /* Vignette links, damit der Text lesbar bleibt */
     .about-bg::after {
