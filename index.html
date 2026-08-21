@@ -390,12 +390,80 @@
         padding: 0.45rem 0 !important;
         font-size: 0.65rem !important;
       }
-      #hero-about-btn {
+      #hero-about-btn,
+      #hero-peek-btn {
         margin-top: 0.25rem !important;
         width: 150px !important;
         padding: 0.45rem 0 !important;
         font-size: 0.65rem !important;
       }
+    }
+
+    /* ── LESEPROBE-OVERLAY ── */
+    #leseprobe-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem 1.5rem;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(2px);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    #leseprobe-overlay.open { display: flex; }
+    #leseprobe-overlay.visible { opacity: 1; }
+    /* Freigestellt: kein Rahmen, kein Hintergrund – nur das Buch schwebt */
+    .leseprobe-panel {
+      position: relative;
+      width: min(96vw, 1150px);
+      height: min(90vh, 980px);
+      background: transparent;
+      transform: scale(0.96);
+      transition: transform 0.3s ease;
+    }
+    #leseprobe-overlay.visible .leseprobe-panel { transform: scale(1); }
+    .leseprobe-panel iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      background: transparent;
+    }
+    #leseprobe-close {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      z-index: 2;
+      background: rgba(0,0,0,0.45);
+      border: 1px solid rgba(200,184,130,0.55);
+      color: var(--accent);
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      font-size: 1rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    #leseprobe-close:hover { background: var(--accent); color: #000; }
+    /* Buchcover im Hero ist anklickbar */
+    #hero-cover-btn {
+      background: none;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      display: block;
+      transition: transform 0.25s;
+    }
+    #hero-cover-btn:hover { transform: translateY(-3px) scale(1.02); }
+    #hero-cover-btn:focus-visible,
+    #leseprobe-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    @media (max-width: 768px) {
+      #leseprobe-overlay { padding: 1rem 0.6rem; }
+      .leseprobe-panel { height: min(88vh, 800px); }
     }
 
     /* ── SECTIONS GENERAL ── */
@@ -1122,8 +1190,10 @@
     <div class="hero-content">
       <div id="hero-name-wrap" style="margin-left: calc(4rem + 2cm); display: inline-flex; flex-direction: column; align-items: center;">
         <h1 id="hero-name" style="color:#fff; white-space: nowrap;" data-i18n="hero-book-launch">Mein erstes Buch ist da!</h1>
-        <img src="assets/images/Buchcover-v2.webp" alt="Cycling Cities – die leise Revolution der Städte"
-          style="width:clamp(92px,17vw,168px); margin: 1rem 0; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6)); pointer-events:none;" />
+        <button id="hero-cover-btn" type="button" onclick="openLeseprobe()" aria-label="Leseprobe öffnen">
+          <img src="assets/images/Buchcover-v2.webp" alt="Cycling Cities – die leise Revolution der Städte"
+            style="width:clamp(92px,17vw,168px); margin: 1rem 0; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6)); display:block;" />
+        </button>
         <a id="hero-preorder-btn" href="https://shop.autorenwelt.de/products/cycling-cities-die-leise-revolution-der-stadte-von-ingwar-perowanowitsch" target="_blank" rel="noopener noreferrer"
           style="border: 1px solid var(--accent); color: var(--accent); text-decoration: none; padding: 0.6rem 0; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; transition: background 0.25s, color 0.25s; margin-top: 0.7rem; width: 175px; text-align: center; display: block; border-radius: 4px;"
           onmouseover="this.style.background='var(--accent)';this.style.color='var(--bg)'"
@@ -1132,9 +1202,21 @@
           style="border: 1px solid var(--accent); color: var(--accent); text-decoration: none; padding: 0.6rem 0; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; transition: background 0.25s, color 0.25s; margin-top: 0.5rem; width: 175px; text-align: center; display: block; border-radius: 4px;"
           onmouseover="this.style.background='var(--accent)';this.style.color='var(--bg)'"
           onmouseout="this.style.background='transparent';this.style.color='var(--accent)'" data-i18n="hero-about">Worum geht's?</a>
+        <button id="hero-peek-btn" type="button" onclick="openLeseprobe()"
+          style="border: 1px solid var(--accent); background: transparent; color: var(--accent); font-family: inherit; cursor: pointer; padding: 0.6rem 0; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; transition: background 0.25s, color 0.25s; margin-top: 0.5rem; width: 175px; text-align: center; display: block; border-radius: 4px;"
+          onmouseover="this.style.background='var(--accent)';this.style.color='var(--bg)'"
+          onmouseout="this.style.background='transparent';this.style.color='var(--accent)'" data-i18n="hero-peek">Blick ins Buch</button>
       </div>
     </div>
   </section>
+
+  <!-- ── LESEPROBE-OVERLAY ── -->
+  <div id="leseprobe-overlay" role="dialog" aria-modal="true" aria-label="Leseprobe Cycling Cities" onclick="if(event.target===this)closeLeseprobe()">
+    <div class="leseprobe-panel">
+      <button id="leseprobe-close" type="button" onclick="closeLeseprobe()" aria-label="Leseprobe schließen">✕</button>
+      <iframe id="leseprobe-frame" data-src="leseprobe.html" title="Leseprobe Cycling Cities"></iframe>
+    </div>
+  </div>
 
   <!-- ── ABOUT ── -->
   <section id="about">
@@ -1781,6 +1863,7 @@
         'hero-book-launch': 'Mein erstes Buch ist da!',
         'hero-preorder':    'Jetzt vorbestellen!',
         'hero-about':       'Worum geht\'s?',
+        'hero-peek':        'Blick ins Buch',
         'talks-label':      'Keynotes &amp; Vorträge',
         'talks-title':      'Vorträge',
         'talks-p1':         'Seit 2023 habe ich über 100 Vorträge und Keynotes rund um die Themen „fahrradgerechte Städte" und Klimakrise vor Vereinen, Parteien, Unternehmen, auf Messen und Kongressen gehalten. Mit Bildern, Videos oder mit ganzen Filmen nehme ich die Menschen mit auf eine Reise zu den schönsten Fahrradstädten Europas. Ich erzähle die Geschichte, wie diese Städte die Verkehrswende geschafft haben und was wir in Deutschland von ihnen lernen können. Im Anschluss ergeben sich immer spannende Podiumsdiskussionen mit örtlichen Politikern und Experten oder interessante Publikumsgespräche.',
@@ -1863,6 +1946,7 @@
         'hero-book-launch': 'My first book is here!',
         'hero-preorder':    'Pre-order now!',
         'hero-about':       'What\'s it about?',
+        'hero-peek':        'Look inside',
         'talks-label':      'Keynotes &amp; Talks',
         'talks-title':      'Talks',
         'talks-p1':         'Since 2023 I have given over 100 talks and keynotes on the topics of "bicycle-friendly cities" and the climate crisis to associations, political parties, companies, trade fairs and congresses. Using images, videos or entire films, I take audiences on a journey to the most beautiful cycling cities in Europe. I tell the story of how these cities achieved the mobility transition and what Germany can learn from them. This is always followed by lively panel discussions with local politicians and experts or engaging conversations with the audience.',
@@ -1945,6 +2029,7 @@
         'hero-book-launch': 'Mon premier livre est là !',
         'hero-preorder':    'Précommander maintenant !',
         'hero-about':       'De quoi s\'agit-il ?',
+        'hero-peek':        'Feuilleter le livre',
         'talks-label':      'Keynotes &amp; Conférences',
         'talks-title':      'Conférences',
         'talks-p1':         'Depuis 2023, j\'ai donné plus de 100 conférences et keynotes sur les thèmes des « villes adaptées au vélo » et de la crise climatique devant des associations, des partis politiques, des entreprises, des foires et des congrès. À l\'aide d\'images, de vidéos ou de films entiers, j\'emmène le public dans un voyage à travers les plus belles villes cyclables d\'Europe. Je raconte comment ces villes ont réussi leur transition de mobilité et ce que l\'Allemagne peut en apprendre. S\'ensuivent toujours des tables rondes animées avec des politiciens et experts locaux ou des échanges passionnants avec le public.',
@@ -2129,6 +2214,41 @@
         alert('Keine Verbindung. Bitte prüfe deine Internetverbindung oder schreib direkt an ingwarpero@posteo.net');
       } finally {
         btn.disabled = false;
+      }
+    });
+
+    /* ── Leseprobe-Overlay ── */
+    let leseprobeOpener = null;
+
+    function openLeseprobe() {
+      const overlay = document.getElementById('leseprobe-overlay');
+      const frame = document.getElementById('leseprobe-frame');
+      // Die 3 MB werden erst beim ersten Öffnen geladen, nicht beim Seitenaufruf
+      if (!frame.src) frame.src = frame.dataset.src;
+      leseprobeOpener = document.activeElement;
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      requestAnimationFrame(() => overlay.classList.add('visible'));
+      document.getElementById('leseprobe-close').focus();
+    }
+
+    function closeLeseprobe() {
+      const overlay = document.getElementById('leseprobe-overlay');
+      overlay.classList.remove('visible');
+      setTimeout(() => {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+        // Fokus zurück auf das auslösende Element, sonst auf das Buchcover
+        const back = (leseprobeOpener && leseprobeOpener.tagName !== 'BODY')
+          ? leseprobeOpener
+          : document.getElementById('hero-cover-btn');
+        if (back) back.focus();
+      }, 300);
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && document.getElementById('leseprobe-overlay').classList.contains('open')) {
+        closeLeseprobe();
       }
     });
   </script>
