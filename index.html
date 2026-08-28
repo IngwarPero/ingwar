@@ -150,7 +150,7 @@
         "name": "Welche Bücher hat Ingwar Perowanowitsch veröffentlicht?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Ingwar Perowanowitsch hat Vorworte und Nachwörter zu mehreren Büchern über Mobilität und Radkultur verfasst: 'Gesellschaft in Bewegung' (2024) von Marco te Brömmelstroet und Thalia Verkade (Nachwort) sowie 'Modern Cyclists' (2023) von Jakob Hinrichs (Vorwort). Sein eigenes Buch 'Cycling Cities' erscheint 2026."
+          "text": "Sein Buch 'Cycling Cities – die leise Revolution der Städte' erscheint 2026 im Leykam Verlag. Darin nimmt Ingwar Perowanowitsch die Leserinnen und Leser mit zu den Schauplätzen der Mobilitätswende in Europa und zeigt, warum nicht nur Radfahrende von einer sauberen, sicheren und grünen Stadt profitieren."
         }
       },
       {
@@ -201,7 +201,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.4rem 4rem;
+      padding: 1.4rem 2.5rem;
       background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, transparent 100%);
       backdrop-filter: blur(4px);
       border-bottom: 1px solid transparent;
@@ -218,23 +218,25 @@
       letter-spacing: 0.12em;
       color: var(--text);
       text-decoration: none;
+      white-space: nowrap;
     }
     .nav-right {
       display: flex;
       align-items: center;
-      gap: 2.5rem;
+      gap: 1.6rem;
     }
     .nav-links {
       list-style: none;
       display: flex;
-      gap: 2.5rem;
+      gap: 1.25rem;
     }
     .nav-links a {
       color: var(--text);
       text-decoration: none;
-      font-size: 0.78rem;
-      letter-spacing: 0.14em;
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
+      white-space: nowrap;
       transition: color 0.2s;
     }
     .nav-links a:hover { color: #666; }
@@ -474,6 +476,60 @@
     @media (max-width: 768px) {
       #leseprobe-overlay { padding: 1rem 0.6rem; }
       .leseprobe-panel { height: min(88vh, 800px); }
+    }
+
+    /* ── AKTUELLE VORTRÄGE (Aufklapp-Liste) ── */
+    .talks-topics-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 2.2rem 0 0.6rem;
+    }
+    .talks-accordion { margin-bottom: 2rem; }
+    .talk-item { border-top: 1px solid var(--border); }
+    .talk-item:last-child { border-bottom: 1px solid var(--border); }
+    .talk-item > summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.2rem;
+      padding: 0.95rem 0;
+      color: var(--text);
+      font-size: 0.92rem;
+      line-height: 1.5;
+      transition: color 0.2s;
+    }
+    .talk-item > summary::-webkit-details-marker { display: none; }
+    .talk-item > summary:hover { color: var(--accent); }
+    .talk-item > summary:focus-visible { outline: 1px solid var(--accent); outline-offset: 3px; }
+    .talk-chevron {
+      flex-shrink: 0;
+      width: 9px; height: 9px;
+      border-right: 1px solid var(--accent);
+      border-bottom: 1px solid var(--accent);
+      transform: rotate(45deg);
+      margin-bottom: 4px;
+      transition: transform 0.25s ease;
+    }
+    .talk-item[open] > summary { color: var(--accent); }
+    .talk-item[open] .talk-chevron { transform: rotate(-135deg); margin-bottom: 0; margin-top: 4px; }
+    .talk-body { padding: 0 0 1.2rem; animation: talkOpen 0.28s ease; }
+    .talk-body p {
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.8;
+      max-width: 58ch;
+      margin: 0;
+    }
+    @keyframes talkOpen { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) {
+      .talk-body { animation: none; }
+      .talk-chevron { transition: none; }
     }
 
     /* ── SECTIONS GENERAL ── */
@@ -836,6 +892,13 @@
       color: var(--muted);
     }
 
+    /* Menüleiste einzeilig halten: unterhalb 1200px übernimmt das Hamburger-Menü,
+       darüber ist genug Platz für alle Punkte in einer Zeile. */
+    @media (max-width: 1200px) {
+      .hamburger { display: flex; }
+      .nav-links { display: none !important; }
+    }
+
     /* ── MOBILE RESPONSIVE (max-width: 768px) ── */
     @media (max-width: 768px) {
 
@@ -933,25 +996,6 @@
         font-size: clamp(1.5rem, 6vw, 2.2rem) !important;
       }
 
-      /* BOOKS section */
-      #book-gesellschaft,
-      #book-modern {
-        flex-direction: column !important;
-        padding-left: 0 !important;
-        gap: 1.5rem !important;
-      }
-      #book-gesellschaft img,
-      #book-modern img {
-        width: 100% !important;
-        height: auto !important;
-        max-height: 380px;
-        object-fit: cover;
-      }
-      #book-gesellschaft > div:last-child,
-      #book-modern > div:last-child {
-        max-width: 100% !important;
-        padding-top: 0 !important;
-      }
       #books { padding: 3rem 1.2rem !important; }
 
       /* EVENTS */
@@ -1093,18 +1137,8 @@
         padding-top: 0 !important;
       }
 
-      /* ── BÜCHER: Gesellschaft & Modern Cyclists ── */
-      #book-gesellschaft img,
-      #book-modern img {
-        height: auto !important;
-        max-height: none !important;
-        object-fit: contain !important;
-      }
-
       /* ── BÜCHER: Überschriften auf Mobile ── */
-      #book-cycling-cities h3,
-      #book-gesellschaft h3,
-      #book-modern h3 {
+      #book-cycling-cities h3 {
         font-size: 1.1rem !important;
       }
 
@@ -1129,16 +1163,16 @@
 
   <!-- ── MOBILE NAV OVERLAY ── -->
   <div class="mobile-nav" id="mobileNav">
-    <a href="#about" onclick="closeMobileNav()" data-i18n="nav-about">Über mich</a>
-    <a href="#films" onclick="closeMobileNav()" data-i18n="nav-films">Filme</a>
+    <a href="#films" onclick="closeMobileNav()" data-i18n="nav-films">Filmemacher</a>
     <div class="mobile-nav-sub">
       <a href="#film-transformation" onclick="closeMobileNav()" style="font-size:0.72rem;color:var(--muted);">Die Große Transformation</a>
       <a href="#films" onclick="closeMobileNav()" style="font-size:0.72rem;color:var(--muted);">Cycling Cities</a>
       <a href="#film-baku" onclick="closeMobileNav()" style="font-size:0.72rem;color:var(--muted);">Cycling to COP29</a>
     </div>
-    <a href="#books" onclick="closeMobileNav()" data-i18n="nav-books">Bücher</a>
-    <a href="#talks" onclick="closeMobileNav()" data-i18n="nav-talks">Vorträge</a>
+    <a href="#books" onclick="closeMobileNav()" data-i18n="nav-books">Autor</a>
+    <a href="#talks" onclick="closeMobileNav()" data-i18n="nav-talks">Keynote Speaker</a>
     <a href="#events" onclick="closeMobileNav()" data-i18n="nav-events">Veranstaltungen</a>
+    <a href="#about" onclick="closeMobileNav()" data-i18n="nav-about">Über mich</a>
     <a href="#contact" onclick="closeMobileNav()" data-i18n="nav-contact">Kontakt</a>
   </div>
 
@@ -1147,9 +1181,8 @@
     <a href="#hero" class="nav-logo">Ingwar Perowanowitsch</a>
     <div class="nav-right">
       <ul class="nav-links">
-        <li><a href="#about"   data-i18n="nav-about">Über mich</a></li>
         <li>
-          <a href="#films" data-i18n="nav-films" style="cursor:default;">Filme</a>
+          <a href="#films" data-i18n="nav-films" style="cursor:default;">Filmemacher</a>
           <div class="nav-dropdown">
             <a href="#film-transformation">Die Große Transformation</a>
             <a href="#films">Cycling Cities</a>
@@ -1157,15 +1190,14 @@
           </div>
         </li>
         <li>
-          <a href="#books" data-i18n="nav-books" style="cursor:default;">Bücher</a>
+          <a href="#books" data-i18n="nav-books" style="cursor:default;">Autor</a>
           <div class="nav-dropdown">
             <a href="#book-cycling-cities">Cycling Cities – eine leise Revolution der Städte</a>
-            <a href="#book-gesellschaft">Gesellschaft in Bewegung</a>
-            <a href="#book-modern">Modern Cyclists</a>
           </div>
         </li>
-        <li><a href="#talks"   data-i18n="nav-talks">Vorträge</a></li>
+        <li><a href="#talks"   data-i18n="nav-talks">Keynote Speaker</a></li>
         <li><a href="#events"  data-i18n="nav-events">Aktuelle Veranstaltungen</a></li>
+        <li><a href="#about"   data-i18n="nav-about">Über mich</a></li>
         <li><a href="#contact" data-i18n="nav-contact">Kontakt</a></li>
       </ul>
       <div id="langDropdown" style="position:relative;">
@@ -1228,62 +1260,6 @@
     </div>
   </div>
 
-  <!-- ── ABOUT ── -->
-  <section id="about">
-    <div class="about-bg"></div>
-    <div class="about-content">
-      <p class="section-label" data-i18n="about-label">Über mich</p>
-      <div class="divider"></div>
-      <h2 data-i18n="about-heading">Geschichten des Gelingens</h2>
-      <p data-i18n="about-p1">Seit meinem Studium in Groningen in den Niederlanden bin ich von der „fahrradgerechten Stadt" fasziniert. Die einzigartige niederländische Fahrradkultur hat mich inspiriert auch in Deutschland die Vorstellungskraft der Menschen zu wecken und mit Bildern und Geschichten aufzuzeigen, wie eine Stadt, die nicht für Autos, sondern für Menschen gestaltet ist, aussehen könnte.</p>
-      <p data-i18n="about-p2">Dazu schreibe ich Artikel und Bücher, halte Vorträge und mache Filme über die vielen kleinen und großen Geschichten des Gelingens, die einen so wichtigen Beitrag zur ökologischen Transformation leisten. Denn am Ende geht es nicht ums Fahrrad allein. Es geht darum, eine lebenswerte, gerechte und nachhaltige Welt für alle Menschen zu schaffen.</p>
-      <div id="about-social">
-        <!-- Instagram -->
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
-          <a href="https://www.instagram.com/ingwar.perowanowitsch/" target="_blank" rel="noopener noreferrer"
-            style="display: inline-flex; align-items: center; justify-content: center; width: 2.2rem; height: 2.2rem; border-radius: 50%; transition: opacity 0.2s, transform 0.2s;"
-            onmouseover="this.style.opacity='0.75';this.style.transform='scale(1.1)'"
-            onmouseout="this.style.opacity='1';this.style.transform='scale(1)'">
-            <img src="assets/images/Icon.webp" alt="Instagram" style="width:32px;height:32px;object-fit:contain;display:block;"/>
-          </a>
-          <span style="font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4);">Instagram</span>
-        </div>
-        <!-- LinkedIn -->
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
-          <a href="https://www.linkedin.com/in/ingwar-perowanowitsch-7a53872b7/" target="_blank" rel="noopener noreferrer"
-            style="display: inline-flex; align-items: center; justify-content: center; width: 2.2rem; height: 2.2rem; border-radius: 50%; transition: opacity 0.2s, transform 0.2s;"
-            onmouseover="this.style.opacity='0.75';this.style.transform='scale(1.1)'"
-            onmouseout="this.style.opacity='1';this.style.transform='scale(1)'">
-            <img src="assets/images/LinkedIn.webp" alt="LinkedIn" style="width:32px;height:32px;object-fit:contain;display:block;"/>
-          </a>
-          <span style="font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4);">LinkedIn</span>
-        </div>
-        <!-- YouTube -->
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
-          <a href="https://www.youtube.com/@ingwarpero" target="_blank" rel="noopener noreferrer"
-            style="display: inline-flex; align-items: center; justify-content: center; width: 2.2rem; height: 2.2rem; border-radius: 50%; transition: opacity 0.2s, transform 0.2s;"
-            onmouseover="this.style.opacity='0.75';this.style.transform='scale(1.1)'"
-            onmouseout="this.style.opacity='1';this.style.transform='scale(1)'">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-              <rect x="1" y="5" width="22" height="14" rx="4" fill="#FF0000"/>
-              <polygon points="9.5,8.5 16,12 9.5,15.5" fill="white"/>
-            </svg>
-          </a>
-          <span style="font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4);">YouTube</span>
-        </div>
-        <!-- Bluesky -->
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
-          <a href="https://bsky.app/profile/ingwarpero.bsky.social" target="_blank" rel="noopener noreferrer"
-            style="display: inline-flex; align-items: center; justify-content: center; width: 2.2rem; height: 2.2rem; border-radius: 50%; transition: opacity 0.2s, transform 0.2s;"
-            onmouseover="this.style.opacity='0.75';this.style.transform='scale(1.1)'"
-            onmouseout="this.style.opacity='1';this.style.transform='scale(1)'">
-            <img src="assets/images/Bluesky.webp" alt="Bluesky" style="width:32px;height:32px;object-fit:contain;display:block;"/>
-          </a>
-          <span style="font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4);">Bluesky</span>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ── FILM 1: CYCLING CITIES ── -->
   <!-- ── FILM 1: DIE GROẞE TRANSFORMATION ── -->
@@ -1525,46 +1501,6 @@
         <p style="color:var(--accent);font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;margin-top:2rem;" data-i18n="book-cc-meta">Sachbuch &nbsp;·&nbsp; September 2026</p>
       </div>
     </div>
-
-    <!-- Buch 1: Gesellschaft in Bewegung -->
-    <div id="book-gesellschaft" style="display:flex; gap:4rem; align-items:flex-start; margin-top:3rem; padding-left:8rem;">
-      <!-- Cover -->
-      <div style="flex-shrink:0;">
-        <img src="assets/images/Gesellschaft in Bewegung.webp"
-             alt="Gesellschaft in Bewegung – Buch über urbane Mobilität von Marco te Brömmelstroet und Thalia Verkade, mit Nachwort von Ingwar Perowanowitsch (2024)"
-             style="width:380px;height:507px;object-fit:cover;display:block;">
-      </div>
-      <!-- Text -->
-      <div style="max-width:540px; padding-top:0.5rem;">
-        <h3 style="font-size:1.4rem; font-weight:600; letter-spacing:0.04em; margin-bottom:1.4rem; color:var(--fg);" data-i18n="book-gesell-title">Gesellschaft in Bewegung <span style="font-weight:400; opacity:0.6;">(2024) (Nachwort)</span></h3>
-        <p style="color:var(--muted); font-size:0.95rem; line-height:1.9; margin-bottom:2rem;" data-i18n="book-gesell-p1">
-          Der Bestseller aus den Niederlanden: Das große Buch über Verkehr, Mobilität und Gesellschaft von Radfahrprofessor Marco te Brömmelstroet und Journalistin Thalia Verkade. Mit einem Vorwort von Harald Welzer und einem Nachwort von Ingwar Perowanowitsch
-        </p>
-        <p style="color:var(--accent); font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase;" data-i18n="book-gesell-meta">
-          Sachbuch &nbsp;·&nbsp; 2024
-        </p>
-      </div>
-    </div>
-
-    <!-- Buch 2: Modern Cyclists -->
-    <div id="book-modern" style="display:flex; gap:4rem; align-items:flex-start; margin-top:4rem; padding-left:8rem; padding-bottom:1rem;">
-      <!-- Cover -->
-      <div style="flex-shrink:0;">
-        <img src="assets/images/Modern Cyclists.webp"
-             alt="Modern Cyclists – Bildband von Jakob Hinrichs über Fahrradfahrer mit Vorwort von Ingwar Perowanowitsch (2023)"
-             style="width:380px;height:507px;object-fit:cover;display:block;">
-      </div>
-      <!-- Text -->
-      <div style="max-width:540px; padding-top:0.5rem;">
-        <h3 style="font-size:1.4rem; font-weight:600; letter-spacing:0.04em; margin-bottom:1.4rem; color:var(--fg);" data-i18n="book-modern-title">Modern Cyclists <span style="font-weight:400; opacity:0.6;">(2023) (Vorwort)</span></h3>
-        <p style="color:var(--muted); font-size:0.95rem; line-height:1.9; margin-bottom:2rem;" data-i18n="book-modern-p1">
-          Beschreibungen und Illustrationen von Jakob Hinrichs über die vielfältigen Erscheinungsformen moderner Fahrradfahrer:innen. Mit einem Vorwort von Ingwar Perowanowitsch
-        </p>
-        <p style="color:var(--accent); font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase;" data-i18n="book-modern-meta">
-          Bildband &nbsp;·&nbsp; 2023
-        </p>
-      </div>
-    </div>
   </section>
 
   <!-- ── VORTRÄGE ── -->
@@ -1580,6 +1516,45 @@
         <div class="divider"></div>
         <h2 style="margin-bottom:1.5rem;" data-i18n="talks-title">Vorträge</h2>
         <p style="color:var(--muted);font-size:0.95rem;line-height:1.9;margin-bottom:1.5rem;" data-i18n="talks-p1">Seit 2023 habe ich über 100 Vorträge und Keynotes rund um die Themen „fahrradgerechte Städte" und Klimakrise vor Vereinen, Parteien, Unternehmen, auf Messen und Kongressen gehalten. Mit Bildern, Videos oder mit ganzen Filmen nehme ich die Menschen mit auf eine Reise zu den schönsten Fahrradstädten Europas. Ich erzähle die Geschichte, wie diese Städte die Verkehrswende geschafft haben und was wir in Deutschland von ihnen lernen können. Im Anschluss ergeben sich immer spannende Podiumsdiskussionen mit örtlichen Politikern und Experten oder interessante Publikumsgespräche.</p>
+        <h3 class="talks-topics-label" data-i18n="talks-topics-label">Aktuelle Vorträge</h3>
+        <div class="talks-accordion">
+          <details class="talk-item">
+            <summary>
+              <span data-i18n="talks-topic-1">Keynote Cycling Cities</span>
+              <span class="talk-chevron" aria-hidden="true"></span>
+            </summary>
+            <div class="talk-body">
+              <p data-i18n="talks-topic-1-desc">Ein Vortrag über die schönsten Fahrradstädte Europas. Der rote Leitfaden des Vortrags ist meine 2000 Kilometer lange Fahrradreise im Jahr 2025 von Freiburg nach Paris, Gent, Amsterdam, Utrecht, Hamburg bis nach Kopenhagen. Mit Bildern und Videos zeige ich, wie diese Städte sich im Laufe der letzten Jahre und Jahrzehnte gewandelt haben, wie ihnen die Verkehrswende gelungen ist und was wir in Deutschland, Österreich oder Schweiz von ihnen lernen können.</p>
+            </div>
+          </details>
+          <details class="talk-item">
+            <summary>
+              <span data-i18n="talks-topic-2">Keynote „Die fahrradgerechte Stadt“</span>
+              <span class="talk-chevron" aria-hidden="true"></span>
+            </summary>
+            <div class="talk-body">
+              <p data-i18n="talks-topic-2-desc">Ein Vortrag darüber, wie die Abkehr von der autogerechten Stadt gelingt und welche Bedingungen für eine fahrradgerechte Stadt gelten müssen. Konkret stelle ich ein 7-Säulen-Modell vor, in dem detailliert sieben Schritte für die fahrradgerechte Stadt beschrieben werden. Mit neuesten Erkenntnissen aus der Verkehrsforschung und praktischen Beispielen aus den Städten.</p>
+            </div>
+          </details>
+          <details class="talk-item">
+            <summary>
+              <span data-i18n="talks-topic-3">Keynote 5000 Kilometer fürs Klima – mit dem Fahrrad zur COP29</span>
+              <span class="talk-chevron" aria-hidden="true"></span>
+            </summary>
+            <div class="talk-body">
+              <p data-i18n="talks-topic-3-desc">Ein Vortrag über meine Fahrradreise von Freiburg nach Aserbaidschan zur 29. Weltklimakonferenz. Im Mittelpunkt stehen die Begegnungen mit den Menschen entlang des Weges. Ich beobachte wie Landschaften und Kulturen sich verändern, berichte über die Abenteuer während einer solch langen Reise und von den Erlebnissen auf der Klimakonferenz. Zum Abschluss gehe ich auf die Frage ein, inwieweit diese Klimakonferenzen überhaupt noch ihren Sinn und Zweck erfüllen.</p>
+            </div>
+          </details>
+          <details class="talk-item">
+            <summary>
+              <span data-i18n="talks-topic-4">Keynote Die Große Transformation</span>
+              <span class="talk-chevron" aria-hidden="true"></span>
+            </summary>
+            <div class="talk-body">
+              <p data-i18n="talks-topic-4-desc">Ein Vortrag darüber, wie die große ökologische Transformation unserer Wirtschaft gelingen kann. Zehn Jahre nach dem Pariser Klimaabkommen gehe ich der Frage nach, wie der aktuelle Zustand der Transformation ist, gehe auf die einzelnen Sektoren ein und berichte über Erfolge und Herausforderungen auf dem Weg zur Klimaneutralität bis 2045.</p>
+            </div>
+          </details>
+        </div>
         <p style="color:var(--muted);font-size:0.95rem;line-height:1.9;" data-i18n="talks-p2">Wenn Sie eine Veranstaltung oder eine Filmaufführung mit mir organisieren möchten, freue ich mich über jede Nachricht.</p>
         <a href="#contact" data-i18n="talks-cta"
           style="margin-top:2rem;display:inline-block;border:1px solid rgba(200,184,130,0.5);color:var(--accent);text-decoration:none;padding:0.7rem 2rem;font-size:0.75rem;letter-spacing:0.18em;text-transform:uppercase;transition:background 0.25s,color 0.25s;"
@@ -1767,6 +1742,63 @@
     </div>
   </section>
 
+  <!-- ── ABOUT ── -->
+  <section id="about">
+    <div class="about-bg"></div>
+    <div class="about-content">
+      <p class="section-label" data-i18n="about-label">Über mich</p>
+      <div class="divider"></div>
+      <h2 data-i18n="about-heading">Geschichten des Gelingens</h2>
+      <p data-i18n="about-p1">Seit meinem Studium in Groningen in den Niederlanden bin ich von der „fahrradgerechten Stadt" fasziniert. Die einzigartige niederländische Fahrradkultur hat mich inspiriert auch in Deutschland die Vorstellungskraft der Menschen zu wecken und mit Bildern und Geschichten aufzuzeigen, wie eine Stadt, die nicht für Autos, sondern für Menschen gestaltet ist, aussehen könnte.</p>
+      <p data-i18n="about-p2">Dazu schreibe ich Artikel und Bücher, halte Vorträge und mache Filme über die vielen kleinen und großen Geschichten des Gelingens, die einen so wichtigen Beitrag zur ökologischen Transformation leisten. Denn am Ende geht es nicht ums Fahrrad allein. Es geht darum, eine lebenswerte, gerechte und nachhaltige Welt für alle Menschen zu schaffen.</p>
+      <div id="about-social">
+        <!-- Instagram -->
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
+          <a href="https://www.instagram.com/ingwar.perowanowitsch/" target="_blank" rel="noopener noreferrer"
+            style="display: inline-flex; align-items: center; justify-content: center; width: 2.2rem; height: 2.2rem; border-radius: 50%; transition: opacity 0.2s, transform 0.2s;"
+            onmouseover="this.style.opacity='0.75';this.style.transform='scale(1.1)'"
+            onmouseout="this.style.opacity='1';this.style.transform='scale(1)'">
+            <img src="assets/images/Icon.webp" alt="Instagram" style="width:32px;height:32px;object-fit:contain;display:block;"/>
+          </a>
+          <span style="font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4);">Instagram</span>
+        </div>
+        <!-- LinkedIn -->
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
+          <a href="https://www.linkedin.com/in/ingwar-perowanowitsch-7a53872b7/" target="_blank" rel="noopener noreferrer"
+            style="display: inline-flex; align-items: center; justify-content: center; width: 2.2rem; height: 2.2rem; border-radius: 50%; transition: opacity 0.2s, transform 0.2s;"
+            onmouseover="this.style.opacity='0.75';this.style.transform='scale(1.1)'"
+            onmouseout="this.style.opacity='1';this.style.transform='scale(1)'">
+            <img src="assets/images/LinkedIn.webp" alt="LinkedIn" style="width:32px;height:32px;object-fit:contain;display:block;"/>
+          </a>
+          <span style="font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4);">LinkedIn</span>
+        </div>
+        <!-- YouTube -->
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
+          <a href="https://www.youtube.com/@ingwarpero" target="_blank" rel="noopener noreferrer"
+            style="display: inline-flex; align-items: center; justify-content: center; width: 2.2rem; height: 2.2rem; border-radius: 50%; transition: opacity 0.2s, transform 0.2s;"
+            onmouseover="this.style.opacity='0.75';this.style.transform='scale(1.1)'"
+            onmouseout="this.style.opacity='1';this.style.transform='scale(1)'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+              <rect x="1" y="5" width="22" height="14" rx="4" fill="#FF0000"/>
+              <polygon points="9.5,8.5 16,12 9.5,15.5" fill="white"/>
+            </svg>
+          </a>
+          <span style="font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4);">YouTube</span>
+        </div>
+        <!-- Bluesky -->
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
+          <a href="https://bsky.app/profile/ingwarpero.bsky.social" target="_blank" rel="noopener noreferrer"
+            style="display: inline-flex; align-items: center; justify-content: center; width: 2.2rem; height: 2.2rem; border-radius: 50%; transition: opacity 0.2s, transform 0.2s;"
+            onmouseover="this.style.opacity='0.75';this.style.transform='scale(1.1)'"
+            onmouseout="this.style.opacity='1';this.style.transform='scale(1)'">
+            <img src="assets/images/Bluesky.webp" alt="Bluesky" style="width:32px;height:32px;object-fit:contain;display:block;"/>
+          </a>
+          <span style="font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4);">Bluesky</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ── CONTACT ── -->
   <section id="contact">
     <div class="contact-info">
@@ -1849,9 +1881,9 @@
     /* ── TRANSLATIONS ── */
     const translations = {
       de: {
-        'nav-films':        'Filme',
-        'nav-books':        'Bücher',
-        'nav-talks':        'Vorträge',
+        'nav-films':        'Filmemacher',
+        'nav-books':        'Autor',
+        'nav-talks':        'Keynote Speaker',
         'nav-about':        'Über mich',
         'nav-events':       'Aktuelle Veranstaltungen',
         'nav-contact':      'Kontakt',
@@ -1887,14 +1919,6 @@
         'prod-cta':         'Anfrage stellen',
         'books-label':      'Publikationen',
         'books-title':      'Bücher',
-        'book-gesell-title':'Gesellschaft in Bewegung <span style="font-weight:400; opacity:0.6;">(2024) (Nachwort)</span>',
-        'book-gesell-p1':   'Der Bestseller aus den Niederlanden: Das große Buch über Verkehr, Mobilität und Gesellschaft von Radfahrprofessor Marco te Brömmelstroet und Journalistin Thalia Verkade. Mit einem Vorwort von Harald Welzer und einem Nachwort von Ingwar Perowanowitsch',
-        'book-gesell-p2':   '',
-        'book-gesell-meta': 'Sachbuch &nbsp;·&nbsp; 2024',
-        'book-modern-title':'Modern Cyclists <span style="font-weight:400; opacity:0.6;">(2023) (Vorwort)</span>',
-        'book-modern-p1':   'Beschreibungen und Illustrationen von Jakob Hinrichs über die vielfältigen Erscheinungsformen moderner Fahrradfahrer:innen. Mit einem Vorwort von Ingwar Perowanowitsch',
-        'book-modern-p2':   '',
-        'book-modern-meta': 'Bildband &nbsp;·&nbsp; 2023',
         'book-cc-subtitle': 'Die leise Revolution der Städte',
         'book-cc-p1':       'Mein allererstes Buch ist da! Ein Jahrzehnt nach meinem Erstkontakt mit einer Fahrradstadt ist dieses Buch eine Zusammenfassung meiner bisherigen Erkenntnisse. Es ist ein Rückblick, eine Bestandsaufnahme und ein Ausblick in die Zukunft. Ich möchte wissen: Was ist eigentlich das moralische Dilemma der autogerechten Stadt? Warum ist Deutschland so autozentriert? Warum ist das Fahrrad die Antwort auf all unsere ökologischen Probleme und wie wird die Verkehrswende in anderen europäischen Städten umgesetzt? Das Buch ist eine neue Geschichte des Fahrrads, es ist eine Reise zu den Schauplätzen der Verkehrswende und am Ende ist es auch eine ganz persönliche Liebeserklärung an ein wundervolles Verkehrsmittel, das uns seit über 200 Jahren begleitet und derzeit eine so schöne und kraftvolle Renaissance erlebt.',
         'book-cc-p2':       'Ich hoffe sehr, dass euch das Buch gefällt. 🙏❤️',
@@ -1909,6 +1933,15 @@
         'talks-p1':         'Seit 2023 habe ich über 100 Vorträge und Keynotes rund um die Themen „fahrradgerechte Städte" und Klimakrise vor Vereinen, Parteien, Unternehmen, auf Messen und Kongressen gehalten. Mit Bildern, Videos oder mit ganzen Filmen nehme ich die Menschen mit auf eine Reise zu den schönsten Fahrradstädten Europas. Ich erzähle die Geschichte, wie diese Städte die Verkehrswende geschafft haben und was wir in Deutschland von ihnen lernen können. Im Anschluss ergeben sich immer spannende Podiumsdiskussionen mit örtlichen Politikern und Experten oder interessante Publikumsgespräche.',
         'talks-p2':         'Wenn Sie eine Veranstaltung oder eine Filmaufführung mit mir organisieren möchten, freue ich mich über jede Nachricht.',
         'talks-cta':        'Anfrage stellen',
+        'talks-topics-label':  'Aktuelle Vorträge',
+        'talks-topic-1':       'Keynote Cycling Cities',
+        'talks-topic-1-desc':  'Ein Vortrag über die schönsten Fahrradstädte Europas. Der rote Leitfaden des Vortrags ist meine 2000 Kilometer lange Fahrradreise im Jahr 2025 von Freiburg nach Paris, Gent, Amsterdam, Utrecht, Hamburg bis nach Kopenhagen. Mit Bildern und Videos zeige ich, wie diese Städte sich im Laufe der letzten Jahre und Jahrzehnte gewandelt haben, wie ihnen die Verkehrswende gelungen ist und was wir in Deutschland, Österreich oder Schweiz von ihnen lernen können.',
+        'talks-topic-2':       'Keynote „Die fahrradgerechte Stadt“',
+        'talks-topic-2-desc':  'Ein Vortrag darüber, wie die Abkehr von der autogerechten Stadt gelingt und welche Bedingungen für eine fahrradgerechte Stadt gelten müssen. Konkret stelle ich ein 7-Säulen-Modell vor, in dem detailliert sieben Schritte für die fahrradgerechte Stadt beschrieben werden. Mit neuesten Erkenntnissen aus der Verkehrsforschung und praktischen Beispielen aus den Städten.',
+        'talks-topic-3':       'Keynote 5000 Kilometer fürs Klima – mit dem Fahrrad zur COP29',
+        'talks-topic-3-desc':  'Ein Vortrag über meine Fahrradreise von Freiburg nach Aserbaidschan zur 29. Weltklimakonferenz. Im Mittelpunkt stehen die Begegnungen mit den Menschen entlang des Weges. Ich beobachte wie Landschaften und Kulturen sich verändern, berichte über die Abenteuer während einer solch langen Reise und von den Erlebnissen auf der Klimakonferenz. Zum Abschluss gehe ich auf die Frage ein, inwieweit diese Klimakonferenzen überhaupt noch ihren Sinn und Zweck erfüllen.',
+        'talks-topic-4':       'Keynote Die Große Transformation',
+        'talks-topic-4-desc':  'Ein Vortrag darüber, wie die große ökologische Transformation unserer Wirtschaft gelingen kann. Zehn Jahre nach dem Pariser Klimaabkommen gehe ich der Frage nach, wie der aktuelle Zustand der Transformation ist, gehe auf die einzelnen Sektoren ein und berichte über Erfolge und Herausforderungen auf dem Weg zur Klimaneutralität bis 2045.',
         'events-label':     'Veranstaltungen',
         'events-title':     'Aktuelle Veranstaltungen',
         'events-p1':        'Hier finden Sie eine Übersicht der kommenden Vorträge, Screenings und Veranstaltungen, bei denen Ingwar Perowanowitsch zu Gast ist.',
@@ -1934,9 +1967,9 @@
         'month-december':   'Dezember',
       },
       en: {
-        'nav-films':        'Films',
-        'nav-books':        'Books',
-        'nav-talks':        'Talks',
+        'nav-films':        'Filmmaker',
+        'nav-books':        'Author',
+        'nav-talks':        'Keynote Speaker',
         'nav-about':        'About',
         'nav-events':       'Upcoming Events',
         'nav-contact':      'Contact',
@@ -1972,14 +2005,6 @@
         'prod-cta':         'Get in touch',
         'books-label':      'Publications',
         'books-title':      'Books',
-        'book-gesell-title':'Society in Motion <span style="font-weight:400; opacity:0.6;">(2024) (Foreword)</span>',
-        'book-gesell-p1':   'Society in Motion explores the many dimensions of the ecological and social transformation of our time. The book brings together contributions from scientists, activists and practitioners showing how mobility, urban planning and climate policy interact – and what role each individual can play.',
-        'book-gesell-p2':   'The foreword is by Ingwar Perowanowitsch, who draws on his personal experience as a cycle traveller and filmmaker to describe how movement – in the literal as well as the figurative sense – can be one of the most powerful forces for social change.',
-        'book-gesell-meta': 'Non-fiction &nbsp;·&nbsp; 2024',
-        'book-modern-title':'Modern Cyclists <span style="font-weight:400; opacity:0.6;">(2023) (Foreword)</span>',
-        'book-modern-p1':   'Modern Cyclists is a visually stunning photo book documenting the life and culture of urban cycling in the world\'s most beautiful cycling cities. Through large-format photographs, the book shows how the bicycle has become a global symbol of freedom, sustainability and a new form of urban mobility.',
-        'book-modern-p2':   'The foreword is by Ingwar Perowanowitsch, who describes the transformative power of the bicycle – as a tool of the ecological transition and as an expression of a modern, forward-looking lifestyle.',
-        'book-modern-meta': 'Photo Book &nbsp;·&nbsp; 2023',
         'book-cc-subtitle': 'The Quiet Revolution of Cities',
         'book-cc-p1':       'My very first book is here! A decade after my first encounter with a bicycle-friendly city, this book is a summary of everything I have learned so far. It is a retrospective, a stocktaking and a look into the future. I want to know: What is the moral dilemma of the car-centric city? Why is Germany so car-centred? Why is the bicycle the answer to all our ecological problems, and how is the mobility transition being implemented in other European cities? The book is a new history of the bicycle, a journey to the sites of the mobility transition, and in the end also a very personal declaration of love for a wonderful means of transport that has been with us for over 200 years and is currently experiencing such a beautiful and powerful renaissance.',
         'book-cc-p2':       'I truly hope you enjoy the book. 🙏❤️',
@@ -1994,6 +2019,15 @@
         'talks-p1':         'Since 2023 I have given over 100 talks and keynotes on the topics of "bicycle-friendly cities" and the climate crisis to associations, political parties, companies, trade fairs and congresses. Using images, videos or entire films, I take audiences on a journey to the most beautiful cycling cities in Europe. I tell the story of how these cities achieved the mobility transition and what Germany can learn from them. This is always followed by lively panel discussions with local politicians and experts or engaging conversations with the audience.',
         'talks-p2':         'If you would like to organise an event or a film screening with me, I look forward to hearing from you.',
         'talks-cta':        'Get in touch',
+        'talks-topics-label':  'Current talks',
+        'talks-topic-1':       'Keynote Cycling Cities',
+        'talks-topic-1-desc':  'A talk about the finest cycling cities in Europe. Its through-line is my 2000-kilometre bicycle journey in 2025 from Freiburg via Paris, Ghent, Amsterdam, Utrecht and Hamburg to Copenhagen. With images and videos I show how these cities have changed over the past years and decades, how they achieved their mobility transition, and what we in Germany, Austria and Switzerland can learn from them.',
+        'talks-topic-2':       'Keynote “The bicycle-friendly city”',
+        'talks-topic-2-desc':  'A talk about how to move away from the car-oriented city and what conditions a bicycle-friendly city has to meet. I present a seven-pillar model setting out seven concrete steps towards the bicycle-friendly city – with the latest findings from transport research and practical examples from real cities.',
+        'talks-topic-3':       'Keynote 5000 kilometres for the climate – cycling to COP29',
+        'talks-topic-3-desc':  'A talk about my bicycle journey from Freiburg to Azerbaijan for the 29th UN climate conference. At its heart are the encounters with people along the way. I watch landscapes and cultures change, recount the adventures of such a long journey and what I experienced at the climate conference. Finally I turn to the question of whether these climate conferences still serve their purpose at all.',
+        'talks-topic-4':       'Keynote The Great Transformation',
+        'talks-topic-4-desc':  'A talk about how the great ecological transformation of our economy can succeed. Ten years after the Paris Agreement I ask where that transformation currently stands, go through the individual sectors and report on the successes and challenges on the way to climate neutrality by 2045.',
         'events-label':     'Events',
         'events-title':     'Upcoming Events',
         'events-p1':        'Here you will find an overview of upcoming talks, screenings and events where Ingwar Perowanowitsch will be appearing.',
@@ -2019,9 +2053,9 @@
         'month-december':   'December',
       },
       fr: {
-        'nav-films':        'Films',
-        'nav-books':        'Livres',
-        'nav-talks':        'Conférences',
+        'nav-films':        'Cinéaste',
+        'nav-books':        'Auteur',
+        'nav-talks':        'Keynote Speaker',
         'nav-about':        'À propos',
         'nav-events':       'Événements actuels',
         'nav-contact':      'Contact',
@@ -2057,14 +2091,6 @@
         'prod-cta':         'Envoyer une demande',
         'books-label':      'Publications',
         'books-title':      'Livres',
-        'book-gesell-title':'La société en mouvement <span style="font-weight:400; opacity:0.6;">(2024) (Préface)</span>',
-        'book-gesell-p1':   'La société en mouvement explore les multiples dimensions de la transformation écologique et sociale de notre époque. Le livre rassemble des contributions de scientifiques, militants et praticiens qui montrent comment la mobilité, l\'urbanisme et la politique climatique interagissent – et quel rôle chacun peut jouer.',
-        'book-gesell-p2':   'La préface est signée par Ingwar Perowanowitsch, qui s\'appuie sur son expérience personnelle de voyageur à vélo et cinéaste pour décrire comment le mouvement – au sens propre comme au sens figuré – peut être l\'une des forces les plus puissantes pour le changement social.',
-        'book-gesell-meta': 'Essai &nbsp;·&nbsp; 2024',
-        'book-modern-title':'Modern Cyclists <span style="font-weight:400; opacity:0.6;">(2023) (Préface)</span>',
-        'book-modern-p1':   'Modern Cyclists est un magnifique livre de photographies qui documente la vie et la culture du cyclisme urbain dans les plus belles villes cyclables du monde. À travers des photographies grand format, le livre montre comment le vélo est devenu un symbole mondial de liberté, de durabilité et d\'une nouvelle forme de mobilité urbaine.',
-        'book-modern-p2':   'La préface est signée par Ingwar Perowanowitsch, qui décrit le pouvoir transformateur du vélo – comme outil de la transition écologique et comme expression d\'un mode de vie moderne et tourné vers l\'avenir.',
-        'book-modern-meta': 'Livre photo &nbsp;·&nbsp; 2023',
         'book-cc-subtitle': 'La douce révolution des villes',
         'book-cc-p1':       'Mon tout premier livre est là ! Dix ans après ma première rencontre avec une ville adaptée au vélo, ce livre est la synthèse de tout ce que j\'ai appris jusqu\'à présent. C\'est un bilan, un état des lieux et une projection vers l\'avenir. Je veux savoir : quel est le dilemme moral de la ville conçue pour la voiture ? Pourquoi l\'Allemagne est-elle si centrée sur l\'automobile ? Pourquoi le vélo est-il la réponse à tous nos problèmes écologiques et comment la transition de mobilité est-elle mise en œuvre dans d\'autres villes européennes ? Le livre est une nouvelle histoire du vélo, un voyage sur les lieux de la transition de mobilité et, au bout du compte, une déclaration d\'amour très personnelle à un merveilleux moyen de transport qui nous accompagne depuis plus de 200 ans et connaît en ce moment une renaissance si belle et si puissante.',
         'book-cc-p2':       'J\'espère sincèrement que ce livre vous plaira. 🙏❤️',
@@ -2079,6 +2105,15 @@
         'talks-p1':         'Depuis 2023, j\'ai donné plus de 100 conférences et keynotes sur les thèmes des « villes adaptées au vélo » et de la crise climatique devant des associations, des partis politiques, des entreprises, des foires et des congrès. À l\'aide d\'images, de vidéos ou de films entiers, j\'emmène le public dans un voyage à travers les plus belles villes cyclables d\'Europe. Je raconte comment ces villes ont réussi leur transition de mobilité et ce que l\'Allemagne peut en apprendre. S\'ensuivent toujours des tables rondes animées avec des politiciens et experts locaux ou des échanges passionnants avec le public.',
         'talks-p2':         'Si vous souhaitez organiser un événement ou une projection de film avec moi, je serai ravi de recevoir votre message.',
         'talks-cta':        'Envoyer une demande',
+        'talks-topics-label':  'Conférences actuelles',
+        'talks-topic-1':       'Keynote Cycling Cities',
+        'talks-topic-1-desc':  'Une conférence sur les plus belles villes cyclables d’Europe. Son fil conducteur est mon voyage à vélo de 2000 kilomètres en 2025, de Fribourg à Copenhague via Paris, Gand, Amsterdam, Utrecht et Hambourg. Images et vidéos à l’appui, je montre comment ces villes se sont transformées au fil des années et des décennies, comment elles ont réussi leur transition des mobilités et ce que l’Allemagne, l’Autriche et la Suisse peuvent en apprendre.',
+        'talks-topic-2':       'Keynote « La ville cyclable »',
+        'talks-topic-2-desc':  'Une conférence sur la façon de sortir de la ville conçue pour la voiture et sur les conditions à réunir pour une ville cyclable. Je présente un modèle à sept piliers décrivant en détail sept étapes vers la ville cyclable, avec les derniers résultats de la recherche sur les transports et des exemples concrets.',
+        'talks-topic-3':       'Keynote 5000 kilomètres pour le climat – à vélo vers la COP29',
+        'talks-topic-3-desc':  'Une conférence sur mon voyage à vélo de Fribourg jusqu’en Azerbaïdjan, pour la 29e conférence mondiale sur le climat. Au cœur du récit : les rencontres avec les gens sur la route. J’observe les paysages et les cultures qui changent, je raconte les aventures d’un si long voyage et ce que j’ai vécu à la conférence. Pour finir, je me demande si ces conférences remplissent encore leur rôle.',
+        'talks-topic-4':       'Keynote La Grande Transformation',
+        'talks-topic-4-desc':  'Une conférence sur la manière dont la grande transformation écologique de notre économie peut réussir. Dix ans après l’Accord de Paris, j’examine où en est cette transformation, secteur par secteur, et je rends compte des succès et des défis sur le chemin de la neutralité climatique en 2045.',
         'events-label':     'Événements',
         'events-title':     'Événements actuels',
         'events-p1':        'Vous trouverez ici un aperçu des prochaines conférences, projections et événements auxquels Ingwar Perowanowitsch participera.',
