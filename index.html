@@ -348,6 +348,25 @@
       letter-spacing: -0.01em;
       margin-bottom: 1rem;
     }
+    #hero-premiere {
+      margin-top: -0.4rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.88);
+      text-align: center;
+      text-shadow: 0 1px 10px rgba(0,0,0,0.8);
+      max-width: 16rem;
+    }
+    #hero-premiere a {
+      color: var(--accent);
+      text-decoration: none;
+      white-space: nowrap;
+      border-bottom: 1px solid rgba(200,184,130,0.6);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    #hero-premiere a:hover { color: #fff; border-bottom-color: #fff; }
     .hero-subtitle {
       font-size: 0.82rem;
       letter-spacing: 0.22em;
@@ -382,8 +401,14 @@
         gap: 0 !important;
       }
       #hero-name-wrap img {
-        margin-top: 2.5rem !important;
+        margin-top: 0.6rem !important;
         margin-bottom: 0.3rem !important;
+      }
+      /* Die Überschrift ist hier ausgeblendet, der Premierenhinweis bleibt sichtbar */
+      #hero-premiere {
+        margin-top: 2.2rem;
+        font-size: 0.66rem;
+        max-width: 15rem;
       }
       #about-social { flex-wrap: wrap; gap: 1.1rem; margin-top: 2rem; }
       #hero-preorder-btn {
@@ -1232,6 +1257,7 @@
     <div class="hero-content">
       <div id="hero-name-wrap" style="margin-left: calc(4rem + 2cm); display: inline-flex; flex-direction: column; align-items: center;">
         <h1 id="hero-name" style="color:#fff; white-space: nowrap;" data-i18n="hero-book-launch">Mein erstes Buch ist da!</h1>
+        <p id="hero-premiere" data-i18n="hero-premiere">Buchpremiere am 9. Sep. in Berlin. <a href="https://calendar.boell.de/de/event/ingwar-perowanowitsch-cycling-cities-die-leise-revolution-der-staedte" target="_blank" rel="noopener noreferrer">Hier anmelden</a></p>
         <button id="hero-cover-btn" type="button" onclick="openLeseprobe()" aria-label="Leseprobe öffnen">
           <img src="assets/images/Buchcover-v2.webp" alt="Cycling Cities – die leise Revolution der Städte"
             style="width:clamp(92px,17vw,168px); margin: 1rem 0; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6)); display:block;" />
@@ -1925,6 +1951,7 @@
         'book-cc-meta':     'Sachbuch &nbsp;·&nbsp; September 2026',
         'book-cc-cta':      'Jetzt vorbestellen!',
         'hero-book-launch': 'Mein erstes Buch ist da!',
+        'hero-premiere':       'Buchpremiere am 9. Sep. in Berlin. <a href="https://calendar.boell.de/de/event/ingwar-perowanowitsch-cycling-cities-die-leise-revolution-der-staedte" target="_blank" rel="noopener noreferrer">Hier anmelden</a>',
         'hero-preorder':    'Jetzt vorbestellen!',
         'hero-about':       'Worum geht\'s?',
         'hero-peek':        'Blick ins Buch',
@@ -2011,6 +2038,7 @@
         'book-cc-meta':     'Non-fiction &nbsp;·&nbsp; September 2026',
         'book-cc-cta':      'Pre-order now!',
         'hero-book-launch': 'My first book is here!',
+        'hero-premiere':       'Book launch on 9 Sept in Berlin. <a href="https://calendar.boell.de/de/event/ingwar-perowanowitsch-cycling-cities-die-leise-revolution-der-staedte" target="_blank" rel="noopener noreferrer">Register here</a>',
         'hero-preorder':    'Pre-order now!',
         'hero-about':       'What\'s it about?',
         'hero-peek':        'Look inside',
@@ -2097,6 +2125,7 @@
         'book-cc-meta':     'Essai &nbsp;·&nbsp; Septembre 2026',
         'book-cc-cta':      'Précommander maintenant !',
         'hero-book-launch': 'Mon premier livre est là !',
+        'hero-premiere':       'Lancement du livre le 9 sept. à Berlin. <a href="https://calendar.boell.de/de/event/ingwar-perowanowitsch-cycling-cities-die-leise-revolution-der-staedte" target="_blank" rel="noopener noreferrer">Inscription ici</a>',
         'hero-preorder':    'Précommander maintenant !',
         'hero-about':       'De quoi s\'agit-il ?',
         'hero-peek':        'Feuilleter le livre',
