@@ -520,7 +520,7 @@
     .talk-item[open] .talk-chevron { transform: rotate(-135deg); margin-bottom: 0; margin-top: 4px; }
     .talk-body { padding: 0 0 1.2rem; animation: talkOpen 0.28s ease; }
     .talk-body p {
-      color: var(--muted);
+      color: rgba(255,255,255,0.8);
       font-size: 0.85rem;
       line-height: 1.8;
       max-width: 58ch;
@@ -629,26 +629,30 @@
 
     /* Beide Vollbild-Sektionen teilen sich exakt dieselben Schriftgrößen */
     .about-content h2,
-    .dgt-content h2 {
+    .dgt-content h2,
+    .talks-content h2 {
       font-size: clamp(1.6rem, 3vw, 2.4rem);
       margin-bottom: 1.8rem;
       color: #fff;
     }
     .about-content p,
-    .dgt-content p {
+    .dgt-content p,
+    .talks-content > p {
       font-size: 0.92rem;
       line-height: 1.85;
       margin-bottom: 1.2rem;
       color: rgba(255,255,255,0.88);
     }
     .about-content .section-label,
-    .dgt-content .section-label {
+    .dgt-content .section-label,
+    .talks-content .section-label {
       font-size: 0.72rem;
       color: var(--accent);
       margin-bottom: 1rem;
     }
     .about-content .divider,
-    .dgt-content .divider { margin-bottom: 1.6rem; }
+    .dgt-content .divider,
+    .talks-content .divider { margin-bottom: 1.6rem; }
 
     .tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
     .tag {
@@ -664,7 +668,41 @@
     #books { background: var(--bg2); }
 
     /* ── VORTRÄGE ── */
-    #talks { background: var(--bg); padding: 0; }
+    #talks {
+      position: relative;
+      background: var(--bg);
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      scroll-margin-top: 5.5rem;
+    }
+    .talks-bg {
+      position: absolute;
+      inset: 0;
+      background: url('assets/images/keynote-vollbild.jpg') center center/cover no-repeat;
+    }
+    /* Vignette links, damit der Text lesbar bleibt – die Person steht rechts im Bild */
+    .talks-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(0,0,0,0.92) 0%,
+        rgba(0,0,0,0.85) 32%,
+        rgba(0,0,0,0.55) 55%,
+        rgba(0,0,0,0.15) 78%,
+        rgba(0,0,0,0) 100%
+      );
+    }
+    .talks-content {
+      position: relative;
+      z-index: 2;
+      max-width: 620px;
+      padding: 3.5rem 3rem 3.5rem 8rem;
+    }
 
     /* ── CONTACT ── */
     #contact {
@@ -818,7 +856,7 @@
       nav { padding: 1.2rem 2rem; }
       section { padding: 5rem 2rem; }
       .hero-content { left: 2rem; bottom: 4rem; }
-      .about-content, .dgt-content { padding: 4rem 2rem; }
+      .about-content, .dgt-content, .talks-content { padding: 4rem 2rem; }
       #contact { grid-template-columns: 1fr; gap: 3rem; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; }
       .form-row { grid-template-columns: 1fr; }
@@ -919,10 +957,12 @@
 
       /* ABOUT + DIE GROSSE TRANSFORMATION */
       .about-content,
-      #film-transformation .dgt-content { padding: 3.5rem 1.2rem !important; max-width: none !important; }
+      #film-transformation .dgt-content,
+      #talks .talks-content { padding: 3.5rem 1.2rem !important; max-width: none !important; }
       /* Auf schmalen Schirmen den Text über die ganze Breite abdunkeln */
       .about-bg::after,
-      .dgt-bg::after {
+      .dgt-bg::after,
+      .talks-bg::after {
         background: linear-gradient(
           to right,
           rgba(0,0,0,0.9) 0%,
@@ -934,16 +974,14 @@
       /* FILM SECTIONS — remove the large left padding and switch to column */
       #films > div,
       #film-baku > div,
-      #production > div,
-      #talks > div {
+      #production > div {
         flex-direction: column !important;
         padding-left: 0 !important;
       }
 
       /* Fixed-size film/book images — make fluid */
       #film-baku img,
-      #production img,
-      #talks img {
+      #production img {
         width: 100% !important;
         height: auto !important;
         max-height: 380px;
@@ -982,8 +1020,7 @@
       /* Film text panels */
       #films > div > div:last-child,
       #film-baku > div > div:last-child,
-      #production > div > div:last-child,
-      #talks > div > div:last-child {
+      #production > div > div:last-child {
         padding: 2rem 1.2rem !important;
       }
 
@@ -1108,17 +1145,9 @@
         object-fit: contain !important;
       }
 
-      /* ── VORTRÄGE: Bild-Container ── */
-      #talks > div > div:first-child {
-        width: 100% !important;
-        flex-shrink: unset !important;
-        overflow: hidden;
-      }
-      #talks img {
-        width: 100% !important;
-        height: auto !important;
-        max-height: none !important;
-        object-fit: contain !important;
+      /* ── VORTRÄGE: Bildausschnitt auf Mobile ── */
+      .talks-bg {
+        background-position: 62% center !important;
       }
 
       /* ── BÜCHER: Cycling Cities Buch (fehlte komplett) ── */
@@ -1504,18 +1533,13 @@
   </section>
 
   <!-- ── VORTRÄGE ── -->
-  <section id="talks" style="background: var(--bg); padding: 0;">
-    <div style="display: flex; padding-left: 12rem;">
-      <div style="flex-shrink: 0; overflow: hidden;">
-        <img src="assets/images/Vortrag.webp" alt="Ingwar Perowanowitsch hält Keynote-Vortrag über Fahrradstädte und nachhaltige Mobilität vor Publikum"
-          style="width:380px;height:507px;object-fit:cover;object-position:center;display:block;filter:brightness(0.88);transition:transform 0.6s ease;"
-          onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"/>
-      </div>
-      <div style="padding:5rem 4rem;display:flex;flex-direction:column;justify-content:center;background:var(--bg2);flex:1;">
+  <section id="talks">
+    <div class="talks-bg"></div>
+    <div class="talks-content">
         <p class="section-label" data-i18n="talks-label">Keynotes &amp; Vorträge</p>
         <div class="divider"></div>
-        <h2 style="margin-bottom:1.5rem;" data-i18n="talks-title">Vorträge</h2>
-        <p style="color:var(--muted);font-size:0.95rem;line-height:1.9;margin-bottom:1.5rem;" data-i18n="talks-p1">Seit 2023 habe ich über 100 Vorträge und Keynotes rund um die Themen „fahrradgerechte Städte" und Klimakrise vor Vereinen, Parteien, Unternehmen, auf Messen und Kongressen gehalten. Mit Bildern, Videos oder mit ganzen Filmen nehme ich die Menschen mit auf eine Reise zu den schönsten Fahrradstädten Europas. Ich erzähle die Geschichte, wie diese Städte die Verkehrswende geschafft haben und was wir in Deutschland von ihnen lernen können. Im Anschluss ergeben sich immer spannende Podiumsdiskussionen mit örtlichen Politikern und Experten oder interessante Publikumsgespräche.</p>
+        <h2 data-i18n="talks-title">Vorträge</h2>
+        <p data-i18n="talks-p1">Seit 2023 habe ich über 100 Vorträge und Keynotes rund um die Themen „fahrradgerechte Städte" und Klimakrise vor Vereinen, Parteien, Unternehmen, auf Messen und Kongressen gehalten. Mit Bildern, Videos oder mit ganzen Filmen nehme ich die Menschen mit auf eine Reise zu den schönsten Fahrradstädten Europas. Ich erzähle die Geschichte, wie diese Städte die Verkehrswende geschafft haben und was wir in Deutschland von ihnen lernen können. Im Anschluss ergeben sich immer spannende Podiumsdiskussionen mit örtlichen Politikern und Experten oder interessante Publikumsgespräche.</p>
         <h3 class="talks-topics-label" data-i18n="talks-topics-label">Aktuelle Vorträge</h3>
         <div class="talks-accordion">
           <details class="talk-item">
@@ -1564,14 +1588,13 @@
             </div>
           </details>
         </div>
-        <p style="color:var(--muted);font-size:0.95rem;line-height:1.9;" data-i18n="talks-p2">Wenn Sie eine Veranstaltung oder eine Filmaufführung mit mir organisieren möchten, freue ich mich über jede Nachricht.</p>
+        <p data-i18n="talks-p2">Wenn Sie eine Veranstaltung oder eine Filmaufführung mit mir organisieren möchten, freue ich mich über jede Nachricht.</p>
         <a href="#contact" data-i18n="talks-cta"
           style="margin-top:2rem;display:inline-block;border:1px solid rgba(200,184,130,0.5);color:var(--accent);text-decoration:none;padding:0.7rem 2rem;font-size:0.75rem;letter-spacing:0.18em;text-transform:uppercase;transition:background 0.25s,color 0.25s;"
           onmouseover="this.style.background='var(--accent)';this.style.color='var(--bg)'"
           onmouseout="this.style.background='transparent';this.style.color='var(--accent)'">
           Anfrage stellen
         </a>
-      </div>
     </div>
   </section>
 
