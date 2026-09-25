@@ -94,9 +94,6 @@
   .leiste button:disabled{opacity:.3;cursor:default;transform:none;}
   .leiste button:focus-visible{outline:2px solid #c8b882;outline-offset:3px;}
   .zaehler{min-width:160px;text-align:center;font-size:14px;letter-spacing:.02em;}
-  .ton{width:36px !important;height:36px !important;}
-  .ton svg{width:18px;height:18px;}
-  .ton.aus{opacity:.5;}
   .leiste.verborgen{visibility:hidden;}
 
   @media (prefers-reduced-motion: reduce){
@@ -132,7 +129,6 @@
       <button id="knopfZurueck" aria-label="Eine Doppelseite zurück">‹</button>
       <div class="zaehler" id="zaehler" aria-live="polite"></div>
       <button id="knopfWeiter" aria-label="Eine Doppelseite weiter">›</button>
-      <button id="knopfTon" class="ton" aria-pressed="true"></button>
     </div>
   </div>
 <script>
@@ -165,8 +161,7 @@ var buch = document.getElementById('buch'),
     leiste = document.getElementById('leiste'),
     zaehler = document.getElementById('zaehler'),
     knopfZurueck = document.getElementById('knopfZurueck'),
-    knopfWeiter = document.getElementById('knopfWeiter'),
-    knopfTon = document.getElementById('knopfTon');
+    knopfWeiter = document.getElementById('knopfWeiter');
 
 /* ── Doppelseiten bilden ────────────────────────────────────────────
    Im gedruckten Buch steht die ungerade Seite immer rechts, die
@@ -244,41 +239,6 @@ function masze() {
   document.documentElement.style.setProperty('--sw', Math.round(h * VERH) + 'px');
 }
 
-/* ── Das Rascheln: ein gefiltertes Rauschen, das weich ausläuft ── */
-var tonAn = true;
-try { tonAn = localStorage.getItem('leseprobe-ton') !== 'aus'; } catch (e) {}
-var hoerraum = null;
-
-function blaetterKlang() {
-  if (!tonAn) return;
-  try {
-    var Hall = window.AudioContext || window.webkitAudioContext;
-    if (!Hall) return;
-    hoerraum = hoerraum || new Hall();
-    if (hoerraum.state === 'suspended') hoerraum.resume();
-    var t = hoerraum.currentTime, laenge = 0.5;
-    var n = Math.floor(hoerraum.sampleRate * laenge);
-    var puffer = hoerraum.createBuffer(1, n, hoerraum.sampleRate);
-    var d = puffer.getChannelData(0);
-    for (var i = 0; i < n; i++) {
-      var x = i / n;
-      d[i] = (Math.random() * 2 - 1) * Math.min(1, x * 14) * Math.pow(1 - x, 2.4);
-    }
-    var quelle = hoerraum.createBufferSource(); quelle.buffer = puffer;
-    var band = hoerraum.createBiquadFilter(); band.type = 'bandpass'; band.Q.value = 0.7;
-    band.frequency.setValueAtTime(2100, t);
-    band.frequency.exponentialRampToValueAtTime(480, t + laenge);
-    var hoch = hoerraum.createBiquadFilter(); hoch.type = 'highpass'; hoch.frequency.value = 300;
-    var pegel = hoerraum.createGain();
-    pegel.gain.setValueAtTime(0.0001, t);
-    pegel.gain.exponentialRampToValueAtTime(0.16, t + 0.07);
-    pegel.gain.exponentialRampToValueAtTime(0.0001, t + laenge);
-    quelle.connect(band); band.connect(hoch); hoch.connect(pegel);
-    pegel.connect(hoerraum.destination);
-    quelle.start(t); quelle.stop(t + laenge);
-  } catch (e) { /* ohne Ton ist es auch schön */ }
-}
-
 function wurfStarten(el) {
   el.classList.remove('laeuft');
   void el.offsetWidth;
@@ -334,7 +294,6 @@ function weiterBlaettern() {
   wurfStarten(wurfRe);
   if (zweiseitig) wurfStarten(wurfLi);
   buch.classList.remove('geschlossen');
-  blaetterKlang();
   abschliessen(s + 1, blattVor);
 }
 
@@ -358,7 +317,6 @@ function zurueckBlaettern() {
 
     wurfStarten(wurfLi); wurfStarten(wurfRe);
     buch.classList.toggle('geschlossen', s - 1 === 0);
-    blaetterKlang();
     abschliessen(s - 1, blattZurueck);
   } else {
     /* Einseitig: dasselbe Blatt läuft rückwärts */
@@ -372,7 +330,6 @@ function zurueckBlaettern() {
     schattenFuehren(vorVornSchatten, 0, 'ease-out');
 
     wurfStarten(wurfRe);
-    blaetterKlang();
     abschliessen(s - 1, blattVor);
   }
 }
@@ -401,24 +358,6 @@ buch.addEventListener('touchend', function (e) {
   wischStart = null;
 }, { passive: true });
 
-/* ── Ton an/aus ── */
-var SYM_AN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
-var SYM_AUS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="m22 9-6 6"/><path d="m16 9 6 6"/></svg>';
-
-function tonZeichnen() {
-  knopfTon.classList.toggle('aus', !tonAn);
-  knopfTon.setAttribute('aria-pressed', String(tonAn));
-  knopfTon.setAttribute('aria-label', tonAn ? 'Blättergeräusch ausschalten' : 'Blättergeräusch einschalten');
-  knopfTon.innerHTML = tonAn ? SYM_AN : SYM_AUS;
-}
-knopfTon.addEventListener('click', function (e) {
-  e.stopPropagation();
-  tonAn = !tonAn;
-  try { localStorage.setItem('leseprobe-ton', tonAn ? 'an' : 'aus'); } catch (err) {}
-  tonZeichnen();
-  if (tonAn) blaetterKlang();
-});
-
 /* ── Umschalten zwischen Doppel- und Einzelseite ── */
 function modusPruefen() {
   var neu = !engeAnsicht.matches;
@@ -439,7 +378,7 @@ window.addEventListener('resize', masze);
 
 /* ── Start ── */
 buch.classList.toggle('einseitig', !zweiseitig);
-masze(); zeichnen(); leisteAktualisieren(); tonZeichnen();
+masze(); zeichnen(); leisteAktualisieren();
 /* Erst nach dem ersten Aufbau darf das Buch animieren, sonst rutscht es
    beim Laden einmal quer. Kein requestAnimationFrame: das Overlay ist beim
    Laden noch ausgeblendet, und in einem verborgenen Tab feuert es nicht. */
