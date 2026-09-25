@@ -1,2 +1,5 @@
 .DS_Store
 .claude/
+
+# Quell-PNG der Bilder – die Website nutzt die WebP-/JPEG-Fassungen
+assets/images/*.png
