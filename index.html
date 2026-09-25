@@ -282,6 +282,43 @@
     .nav-links li:hover .nav-dropdown,
     .nav-links li:focus-within .nav-dropdown { display: block; }
 
+    /* Scrollbares Menü für die Veranstaltungen */
+    .nav-dropdown-scroll {
+      max-height: min(60vh, 420px);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      min-width: 270px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(200,184,130,0.45) transparent;
+    }
+    .nav-dropdown-scroll::-webkit-scrollbar { width: 6px; }
+    .nav-dropdown-scroll::-webkit-scrollbar-track { background: transparent; }
+    .nav-dropdown-scroll::-webkit-scrollbar-thumb {
+      background: rgba(200,184,130,0.45);
+      border-radius: 3px;
+    }
+    .nav-dropdown-scroll a {
+      display: grid;
+      grid-template-columns: 3.6rem 1fr;
+      gap: 0.6rem;
+      white-space: normal;
+      text-transform: none;
+      letter-spacing: 0.04em;
+    }
+    .nav-dropdown-scroll .ev-datum { color: var(--accent); }
+    .nav-dropdown-scroll .ev-leer {
+      display: block;
+      padding: 0.9rem 1.4rem;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+    /* Lange Keynote-Titel dürfen umbrechen, sonst wird das Menü zu breit */
+    .nav-links li:nth-child(3) .nav-dropdown a {
+      white-space: normal;
+      max-width: 22rem;
+      line-height: 1.45;
+    }
+
     /* ── LANGUAGE BUTTON ── */
     #langBtn {
       background: transparent;
@@ -489,7 +526,7 @@
       margin: 2.2rem 0 0.6rem;
     }
     .talks-accordion { margin-bottom: 2rem; }
-    .talk-item { border-top: 1px solid var(--border); }
+    .talk-item { border-top: 1px solid var(--border); scroll-margin-top: 6rem; }
     .talk-item:last-child { border-bottom: 1px solid var(--border); }
     .talk-item > summary {
       list-style: none;
@@ -1239,8 +1276,20 @@
             <a href="#book-cycling-cities">Cycling Cities – eine leise Revolution der Städte</a>
           </div>
         </li>
-        <li><a href="#talks"   data-i18n="nav-talks">Keynote Speaker</a></li>
-        <li><a href="#events"  data-i18n="nav-events">Aktuelle Veranstaltungen</a></li>
+        <li>
+          <a href="#talks" data-i18n="nav-talks">Keynote Speaker</a>
+          <div class="nav-dropdown">
+            <a href="#keynote-cycling-cities" data-i18n="talks-topic-1">Keynote Cycling Cities</a>
+            <a href="#keynote-fahrradstadt" data-i18n="talks-topic-2">Keynote „Die fahrradgerechte Stadt“</a>
+            <a href="#keynote-klima" data-i18n="talks-topic-3">Keynote 5000 Kilometer fürs Klima – mit dem Fahrrad zur COP29</a>
+            <a href="#keynote-transformation" data-i18n="talks-topic-4">Keynote Die Große Transformation</a>
+            <a href="#keynote-mobilitaet" data-i18n="talks-topic-5">Keynote Die Mobilität der Zukunft</a>
+          </div>
+        </li>
+        <li>
+          <a href="#events" data-i18n="nav-events">Aktuelle Veranstaltungen</a>
+          <div class="nav-dropdown nav-dropdown-scroll" id="eventsDropdown"></div>
+        </li>
         <li><a href="#about"   data-i18n="nav-about">Über mich</a></li>
         <li><a href="#contact" data-i18n="nav-contact">Kontakt</a></li>
       </ul>
@@ -1558,7 +1607,7 @@
         <p data-i18n="talks-p1b">Mit Bildern, Videos und Filmen nehme ich die Menschen mit auf eine Reise zu den schönsten Fahrradstädten Europas, in die Zukunft der Mobilität und zu den Schauplätzen, in denen Menschen einen Beitrag zum Gelingen der ökologischen Transformation leisten. Im Anschluss ergeben sich immer spannende Podiumsdiskussionen mit örtlichen Politikern und Experten und interessante Publikumsgespräche.</p>
         <h3 class="talks-topics-label" data-i18n="talks-topics-label">Aktuelle Vorträge</h3>
         <div class="talks-accordion">
-          <details class="talk-item">
+          <details class="talk-item" id="keynote-cycling-cities">
             <summary>
               <span data-i18n="talks-topic-1">Keynote Cycling Cities</span>
               <span class="talk-chevron" aria-hidden="true"></span>
@@ -1567,7 +1616,7 @@
               <p data-i18n="talks-topic-1-desc">Ein Vortrag über die schönsten Fahrradstädte Europas. Der rote Leitfaden des Vortrags ist meine 2000 Kilometer lange Fahrradreise im Jahr 2025 von Freiburg nach Paris, Gent, Amsterdam, Utrecht, Hamburg bis nach Kopenhagen. Mit Bildern und Videos zeige ich, wie diese Städte sich im Laufe der letzten Jahre und Jahrzehnte gewandelt haben, wie ihnen die Verkehrswende gelungen ist und was wir in Deutschland, Österreich oder Schweiz von ihnen lernen können.</p>
             </div>
           </details>
-          <details class="talk-item">
+          <details class="talk-item" id="keynote-fahrradstadt">
             <summary>
               <span data-i18n="talks-topic-2">Keynote „Die fahrradgerechte Stadt“</span>
               <span class="talk-chevron" aria-hidden="true"></span>
@@ -1576,7 +1625,7 @@
               <p data-i18n="talks-topic-2-desc">Ein Vortrag darüber, wie die Abkehr von der autogerechten Stadt gelingt und welche Bedingungen für eine fahrradgerechte Stadt gelten müssen. Konkret stelle ich ein 7-Säulen-Modell vor, in dem detailliert sieben Schritte für die fahrradgerechte Stadt beschrieben werden. Mit neuesten Erkenntnissen aus der Verkehrsforschung und praktischen Beispielen aus den Städten.</p>
             </div>
           </details>
-          <details class="talk-item">
+          <details class="talk-item" id="keynote-klima">
             <summary>
               <span data-i18n="talks-topic-3">Keynote 5000 Kilometer fürs Klima – mit dem Fahrrad zur COP29</span>
               <span class="talk-chevron" aria-hidden="true"></span>
@@ -1585,7 +1634,7 @@
               <p data-i18n="talks-topic-3-desc">Ein Vortrag über meine Fahrradreise von Freiburg nach Aserbaidschan zur 29. Weltklimakonferenz. Im Mittelpunkt stehen die Begegnungen mit den Menschen entlang des Weges. Ich beobachte wie Landschaften und Kulturen sich verändern, berichte über die Abenteuer während einer solch langen Reise und von den Erlebnissen auf der Klimakonferenz. Zum Abschluss gehe ich auf die Frage ein, inwieweit diese Klimakonferenzen überhaupt noch ihren Sinn und Zweck erfüllen.</p>
             </div>
           </details>
-          <details class="talk-item">
+          <details class="talk-item" id="keynote-transformation">
             <summary>
               <span data-i18n="talks-topic-4">Keynote Die Große Transformation</span>
               <span class="talk-chevron" aria-hidden="true"></span>
@@ -1594,7 +1643,7 @@
               <p data-i18n="talks-topic-4-desc">Ein Vortrag darüber, wie die große ökologische Transformation unserer Wirtschaft gelingen kann. Zehn Jahre nach dem Pariser Klimaabkommen gehe ich der Frage nach, wie der aktuelle Zustand der Transformation ist, gehe auf die einzelnen Sektoren ein und berichte über Erfolge und Herausforderungen auf dem Weg zur Klimaneutralität bis 2045.</p>
             </div>
           </details>
-          <details class="talk-item">
+          <details class="talk-item" id="keynote-mobilitaet">
             <summary>
               <span data-i18n="talks-topic-5">Keynote Die Mobilität der Zukunft</span>
               <span class="talk-chevron" aria-hidden="true"></span>
@@ -2434,6 +2483,53 @@
           ul.style.display = 'none';
         }
       });
+    })();
+
+    /* Menü "Aktuelle Veranstaltungen": Inhalt aus der Terminliste aufbauen.
+       Läuft nach dem Ausblenden vergangener Termine, zeigt also nur kommende. */
+    (function () {
+      const menue = document.getElementById('eventsDropdown');
+      const sektion = document.getElementById('events');
+      if (!menue || !sektion) return;
+
+      const eintraege = [];
+      sektion.querySelectorAll('li').forEach(function (li) {
+        if (getComputedStyle(li).display === 'none') return;
+        const felder = li.querySelectorAll('span');
+        if (felder.length < 2) return;
+        const datum = felder[0].textContent.trim();
+        const stadt = (felder[1].querySelector('strong') || {}).textContent || '';
+        if (!datum || !stadt) return;
+        eintraege.push({ datum: datum, stadt: stadt.trim() });
+      });
+
+      if (!eintraege.length) {
+        menue.innerHTML = '<span class="ev-leer">Zurzeit keine Termine</span>';
+        return;
+      }
+      menue.innerHTML = eintraege.map(function (e) {
+        return '<a href="#events"><span class="ev-datum">' + e.datum + '</span>'
+             + '<span>' + e.stadt + '</span></a>';
+      }).join('');
+    })();
+
+    /* Keynote aus dem Menü heraus aufklappen und ansteuern */
+    (function () {
+      function oeffne(id) {
+        const el = document.getElementById(id);
+        if (!el || el.tagName !== 'DETAILS') return;
+        el.open = true;
+      }
+      document.querySelectorAll('.nav-dropdown a[href^="#keynote-"], .mobile-nav a[href^="#keynote-"]')
+        .forEach(function (a) {
+          a.addEventListener('click', function () {
+            oeffne(a.getAttribute('href').slice(1));
+          });
+        });
+      window.addEventListener('hashchange', function () {
+        if (location.hash.startsWith('#keynote-')) oeffne(location.hash.slice(1));
+      });
+      if (location.hash.startsWith('#keynote-')) oeffne(location.hash.slice(1));
     })();
   </script>
 </body>
