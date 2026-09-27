@@ -313,10 +313,35 @@
       color: var(--muted);
     }
     /* Lange Keynote-Titel dürfen umbrechen, sonst wird das Menü zu breit */
-    .nav-links li:nth-child(3) .nav-dropdown a {
+    .nav-links li.nav-keynotes .nav-dropdown a {
       white-space: normal;
       max-width: 22rem;
       line-height: 1.45;
+    }
+
+    /* Menü "Journalist": Artikel nach Medium gruppiert, Medienname bleibt beim Scrollen oben stehen */
+    .nav-dropdown-artikel {
+      min-width: 340px;
+      max-height: min(70vh, 520px);
+    }
+    .nav-dropdown-artikel a {
+      display: block;
+      max-width: 24rem;
+      line-height: 1.45;
+      padding: 0.55rem 1.4rem;
+    }
+    .nav-dropdown-artikel .artikel-medium {
+      position: sticky;
+      top: -0.9rem;   /* deckt den Innenabstand oben ab, sonst scheinen Titel darüber durch */
+      z-index: 1;
+      display: block;
+      padding: 0.85rem 1.4rem 0.45rem;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
     }
 
     /* ── LANGUAGE BUTTON ── */
@@ -961,6 +986,57 @@
       padding: 5rem 2rem 2rem;
     }
     .mobile-nav.open { display: flex; }
+    /* Aufgeklappte Artikelliste passt nicht immer auf den Schirm: dann oben beginnen und scrollen */
+    .mobile-nav { overflow-y: auto; justify-content: safe center; }
+    .mobile-nav-artikel { width: 100%; max-width: 26rem; text-align: center; }
+    .mobile-nav-artikel summary {
+      list-style: none;
+      cursor: pointer;
+      color: var(--text);
+      font-size: 1.1rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .mobile-nav-artikel summary::-webkit-details-marker { display: none; }
+    .mobile-nav-artikel summary::after {
+      content: '';
+      display: inline-block;
+      width: 0.45em;
+      height: 0.45em;
+      margin-left: 0.6em;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      transform: translateY(-0.2em) rotate(45deg);
+      transition: transform 0.2s;
+    }
+    .mobile-nav-artikel[open] summary { color: var(--accent); }
+    .mobile-nav-artikel[open] summary::after { transform: translateY(0.05em) rotate(-135deg); }
+    .mobile-nav-artikel-liste {
+      margin-top: 1rem;
+      max-height: 42vh;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-nav .mobile-nav-artikel-liste a {
+      display: block;
+      padding: 0.55rem 0.5rem;
+      font-size: 0.85rem;
+      line-height: 1.4;
+      letter-spacing: 0.02em;
+      text-transform: none;
+      color: var(--muted);
+    }
+    .mobile-nav-artikel-liste .artikel-medium {
+      display: block;
+      padding: 1rem 0 0.3rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
     .mobile-nav a {
       color: var(--text);
       text-decoration: none;
@@ -980,6 +1056,15 @@
     .mobile-nav .mobile-nav-sub a {
       font-size: 0.8rem;
       color: var(--muted);
+    }
+
+    /* Mit sieben Menüpunkten wird es zwischen 1200 und 1400px eng:
+       Abstände und Schrift dort etwas zurücknehmen, damit die Leiste einzeilig bleibt. */
+    @media (max-width: 1400px) {
+      nav { padding-left: 1.8rem; padding-right: 1.8rem; }
+      .nav-right { gap: 1.1rem; }
+      .nav-links { gap: 0.95rem; }
+      .nav-links a { font-size: 0.7rem; letter-spacing: 0.09em; }
     }
 
     /* Menüleiste einzeilig halten: unterhalb 1200px übernimmt das Hamburger-Menü,
@@ -1251,6 +1336,10 @@
       <a href="#film-baku" onclick="closeMobileNav()" style="font-size:0.72rem;color:var(--muted);">Cycling to COP29</a>
     </div>
     <a href="#books" onclick="closeMobileNav()" data-i18n="nav-books">Autor</a>
+    <details class="mobile-nav-artikel">
+      <summary data-i18n="nav-journalist">Journalist</summary>
+      <div class="mobile-nav-artikel-liste" id="mobileArticles"></div>
+    </details>
     <a href="#talks" onclick="closeMobileNav()" data-i18n="nav-talks">Keynote Speaker</a>
     <a href="#events" onclick="closeMobileNav()" data-i18n="nav-events">Veranstaltungen</a>
     <a href="#about" onclick="closeMobileNav()" data-i18n="nav-about">Über mich</a>
@@ -1277,6 +1366,49 @@
           </div>
         </li>
         <li>
+          <a href="#" data-i18n="nav-journalist" role="button" aria-haspopup="true" style="cursor:default;" onclick="return false;">Journalist</a>
+          <div class="nav-dropdown nav-dropdown-scroll nav-dropdown-artikel" id="articlesDropdown">
+            <span class="artikel-medium">taz</span>
+            <a href="https://taz.de/EU-vs-Klimakrise/!6123015/" target="_blank" rel="noopener">Wie der Green Deal zu scheitern droht</a>
+            <a href="https://taz.de/Klimawandel-Leugnung-und-Wissenschaft/!6062777/" target="_blank" rel="noopener">Von „wütendem“ Wetter bis Elitenplan</a>
+            <a href="https://taz.de/Mit-dem-Rad-zur-Klimakonferenz-in-Baku/!6053842/" target="_blank" rel="noopener">Am Ende überwiegt die Dankbarkeit</a>
+            <a href="https://taz.de/Mit-dem-Rad-zur-Klimakonferenz-nach-Baku/!6049538/" target="_blank" rel="noopener">Nie mehr ohne meinen Rückspiegel</a>
+            <a href="https://taz.de/Mit-dem-Rad-zur-Klimakonferenz-in-Baku/!6047878/" target="_blank" rel="noopener">Einreise-Erlaubnis per Whatsapp</a>
+            <a href="https://taz.de/Mit-dem-Rad-zur-Klimakonferenz-in-Baku/!6045094/" target="_blank" rel="noopener">Kalte Nächte und eine chaotische Wahl</a>
+            <a href="https://taz.de/Mit-dem-Rad-zur-Klimakonferenz-in-Baku/!6042274/" target="_blank" rel="noopener">Ein Kontinent an Eindrücken</a>
+            <a href="https://taz.de/Mit-dem-Rad-zur-Klimakonferenz/!6039410/" target="_blank" rel="noopener">Auf eine Tasse Cay in der Türkei</a>
+            <a href="https://taz.de/Mit-dem-Rad-zur-Klimakonferenz/!6037270/" target="_blank" rel="noopener">Mit Kissen – aber ohne Kocher</a>
+            <a href="https://taz.de/Mit-dem-Rad-nach-Baku/!6033551/" target="_blank" rel="noopener">Waldbrände umfahren im Balkan</a>
+            <a href="https://taz.de/Mit-dem-Rad-nach-Baku/!6027889/" target="_blank" rel="noopener">Klimafreundlich zur COP29</a>
+            <a href="https://taz.de/Erste-Energiegenossenschaft-in-Berlin/!6016099/" target="_blank" rel="noopener">Von unten eingeheizt</a>
+            <a href="https://taz.de/Fahrradkuriere-gruenden-Kollektiv/!5998443/" target="_blank" rel="noopener">Ihre eigenen Chefs</a>
+            <a href="https://taz.de/Klimaexperte-ueber-Kipppunkte/!5989012/" target="_blank" rel="noopener">„Das Risiko ist inakzeptabel hoch“</a>
+            <a href="https://taz.de/Bauernproteste-in-Deutschland/!5982726/" target="_blank" rel="noopener">Die Wut der Bauern</a>
+            <a href="https://taz.de/Klimaschaedliche-Subventionen/!5974214/" target="_blank" rel="noopener">Das Geld liegt auf der Straße</a>
+            <a href="https://taz.de/Parkende-Autos/!5968714/" target="_blank" rel="noopener">Dieser Platz ist besetzt</a>
+            <span class="artikel-medium">Perspective Daily</span>
+            <a href="https://perspective-daily.de/article/3407-eine-radreise-durch-ein-land-in-aufruhr/" target="_blank" rel="noopener">Eine Radreise durch ein Land in Aufruhr</a>
+            <a href="https://perspective-daily.de/article/3323-fahrradparadies-deutschland-diese-studie-sollte-verkehrsminister-wissing-dringend-lesen/" target="_blank" rel="noopener">Fahrradparadies Deutschland: Diese Studie sollte Verkehrsminister Wissing dringend lesen</a>
+            <a href="https://perspective-daily.de/article/3284-die-fdp-fordert-mehr-autos-in-den-innenstaedten-was-die-partei-wirklich-will/" target="_blank" rel="noopener">Die FDP fordert mehr Autos in den Innenstädten. Was die Partei wirklich will</a>
+            <a href="https://perspective-daily.de/article/3199-das-sind-die-7-zutaten-fuer-den-perfekten-radweg/" target="_blank" rel="noopener">Das sind die 7 Zutaten für den perfekten Radweg</a>
+            <a href="https://perspective-daily.de/article/3106-nachtzuege-in-europa-diese-5-neuen-verbindungen-bringen-dich-schlafend-in-den-urlaub/" target="_blank" rel="noopener">Nachtzüge in Europa: Diese 5 neuen Verbindungen bringen dich schlafend in den Urlaub</a>
+            <a href="https://perspective-daily.de/article/3073-4-massnahmen-fuer-sichere-strassen-die-deutschland-von-anderen-laendern-uebernehmen-kann/" target="_blank" rel="noopener">4 Maßnahmen für sichere Straßen, die Deutschland von anderen Ländern übernehmen kann</a>
+            <a href="https://perspective-daily.de/article/2937-nix-mit-rechts-diese-junge-landwirtin-protestiert-fuer-eine-gute-landwirtschaft/" target="_blank" rel="noopener">Nix mit rechts: Diese junge Landwirtin protestiert für eine gute Landwirtschaft</a>
+            <a href="https://perspective-daily.de/article/2827-meine-tochter-soll-nicht-umsonst-gestorben-sein/" target="_blank" rel="noopener">»Meine Tochter soll nicht umsonst gestorben sein«</a>
+            <a href="https://perspective-daily.de/article/2810-wie-paris-die-kehrtwende-von-der-auto-zur-fahrradmetropole-meistert/" target="_blank" rel="noopener">Wie Paris die Kehrtwende von der Auto- zur Fahrradmetropole meistert</a>
+            <a href="https://perspective-daily.de/article/2680-wie-cdu-und-fdp-gerade-die-verkehrswende-rueckgaengig-machen/" target="_blank" rel="noopener">Wie CDU und FDP gerade die Verkehrswende rückgängig machen</a>
+            <a href="https://perspective-daily.de/article/2666-so-geht-radfahren-in-der-schoensten-fahrradstadt-der-welt/" target="_blank" rel="noopener">So geht Radfahren in der schönsten Fahrradstadt der Welt</a>
+            <a href="https://perspective-daily.de/article/2623-der-nachtzug-ist-zurueck-5-orte-die-du-bald-im-schlaf-erreichst/" target="_blank" rel="noopener">Der Nachtzug ist zurück! 5 Orte, die du bald im Schlaf erreichst</a>
+            <a href="https://perspective-daily.de/article/2444-7-ideen-mit-denen-deine-stadt-dem-radverkehr-kurzfristig-helfen-kann/" target="_blank" rel="noopener">7 Ideen, mit denen deine Stadt dem Radverkehr kurzfristig helfen kann</a>
+            <span class="artikel-medium">Focus</span>
+            <a href="https://www.focus.de/earth/klimareise/die-gruenste-hauptstadt-europas-schafft-das-wovon-autoland-deutschland-traeumt_e0cbdacc-b7ab-45d1-8315-c4b9aad07aee.html" target="_blank" rel="noopener">Die grünste Hauptstadt Europas schafft das, wovon Autoland Deutschland träumt</a>
+            <span class="artikel-medium">Republik</span>
+            <a href="https://www.republik.ch/2025/02/12/das-nachtzug-dilemma" target="_blank" rel="noopener">Das Nachtzug-Dilemma</a>
+            <a href="https://www.republik.ch/2024/06/24/lebensadern-fuer-velofahrerinnen" target="_blank" rel="noopener">Lebensadern für Velofahrerinnen</a>
+            <a href="https://www.republik.ch/2024/04/04/strassenkampf" target="_blank" rel="noopener">Strassenkampf</a>
+          </div>
+        </li>
+        <li class="nav-keynotes">
           <a href="#talks" data-i18n="nav-talks">Keynote Speaker</a>
           <div class="nav-dropdown">
             <a href="#keynote-cycling-cities" data-i18n="talks-topic-1">Keynote Cycling Cities</a>
@@ -1976,6 +2108,7 @@
       de: {
         'nav-films':        'Filmemacher',
         'nav-books':        'Autor',
+        'nav-journalist':   'Journalist',
         'nav-talks':        'Keynote Speaker',
         'nav-about':        'Über mich',
         'nav-events':       'Aktuelle Veranstaltungen',
@@ -2065,6 +2198,7 @@
       en: {
         'nav-films':        'Filmmaker',
         'nav-books':        'Author',
+        'nav-journalist':   'Journalist',
         'nav-talks':        'Keynote Speaker',
         'nav-about':        'About',
         'nav-events':       'Upcoming Events',
@@ -2154,6 +2288,7 @@
       fr: {
         'nav-films':        'Cinéaste',
         'nav-books':        'Auteur',
+        'nav-journalist':   'Journaliste',
         'nav-talks':        'Keynote Speaker',
         'nav-about':        'À propos',
         'nav-events':       'Événements actuels',
@@ -2513,7 +2648,14 @@
       }).join('');
     })();
 
-    /* Keynote aus dem Menü heraus aufklappen und ansteuern */
+    /* Menü "Journalist": das Handy-Menü übernimmt die Artikelliste aus der Desktop-Navigation */
+(function () {
+  const quelle = document.getElementById('articlesDropdown');
+  const ziel = document.getElementById('mobileArticles');
+  if (quelle && ziel) ziel.innerHTML = quelle.innerHTML;
+})();
+
+/* Keynote aus dem Menü heraus aufklappen und ansteuern */
     (function () {
       function oeffne(id) {
         const el = document.getElementById(id);
