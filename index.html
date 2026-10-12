@@ -1341,7 +1341,7 @@
       <div class="mobile-nav-artikel-liste" id="mobileArticles"></div>
     </details>
     <a href="#talks" onclick="closeMobileNav()" data-i18n="nav-talks">Keynote Speaker</a>
-    <a href="#events" onclick="closeMobileNav()" data-i18n="nav-events">Veranstaltungen</a>
+    <a href="#events" onclick="closeMobileNav()" data-i18n="nav-events">Herbst-Tour</a>
     <a href="#about" onclick="closeMobileNav()" data-i18n="nav-about">Über mich</a>
     <a href="#contact" onclick="closeMobileNav()" data-i18n="nav-contact">Kontakt</a>
   </div>
@@ -1419,7 +1419,7 @@
           </div>
         </li>
         <li>
-          <a href="#events" data-i18n="nav-events">Aktuelle Veranstaltungen</a>
+          <a href="#events" data-i18n="nav-events">Herbst-Tour</a>
           <div class="nav-dropdown nav-dropdown-scroll" id="eventsDropdown"></div>
         </li>
         <li><a href="#about"   data-i18n="nav-about">Über mich</a></li>
@@ -2111,7 +2111,7 @@
         'nav-journalist':   'Journalist',
         'nav-talks':        'Keynote Speaker',
         'nav-about':        'Über mich',
-        'nav-events':       'Aktuelle Veranstaltungen',
+        'nav-events':       'Herbst-Tour',
         'nav-contact':      'Kontakt',
         'hero-subtitle':    'Filmemacher &nbsp;·&nbsp; Autor &nbsp;·&nbsp; Keynote Speaker',
         'hero-cta':         'Filme entdecken',
@@ -2201,7 +2201,7 @@
         'nav-journalist':   'Journalist',
         'nav-talks':        'Keynote Speaker',
         'nav-about':        'About',
-        'nav-events':       'Upcoming Events',
+        'nav-events':       'Autumn Tour',
         'nav-contact':      'Contact',
         'hero-subtitle':    'Filmmaker &nbsp;·&nbsp; Author &nbsp;·&nbsp; Keynote Speaker',
         'hero-cta':         'Discover Films',
@@ -2291,7 +2291,7 @@
         'nav-journalist':   'Journaliste',
         'nav-talks':        'Keynote Speaker',
         'nav-about':        'À propos',
-        'nav-events':       'Événements actuels',
+        'nav-events':       'Tournée d\'automne',
         'nav-contact':      'Contact',
         'hero-subtitle':    'Cinéaste &nbsp;·&nbsp; Auteur &nbsp;·&nbsp; Conférencier',
         'hero-cta':         'Découvrir les films',
@@ -2572,62 +2572,8 @@
   </script>
 
   <script>
-    /* Auto-hide past events */
-    (function () {
-      const monthMap = {
-        'Januar': 1, 'Februar': 2, 'März': 3, 'April': 4, 'Mai': 5, 'Juni': 6,
-        'Juli': 7, 'August': 8, 'September': 9, 'Oktober': 10, 'November': 11, 'Dezember': 12
-      };
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-
-      const section = document.getElementById('events');
-      if (!section) return;
-
-      section.querySelectorAll('h3').forEach(function (h3) {
-        const monthNum = monthMap[h3.textContent.trim()];
-        if (!monthNum) return;
-
-        // If month is already past this year, assume next year; otherwise current year
-        const year = (monthNum < today.getMonth() + 1)
-          ? today.getFullYear() + 1
-          : today.getFullYear();
-
-        // Find the immediately following <ul>
-        let ul = h3.nextElementSibling;
-        while (ul && ul.tagName !== 'UL') ul = ul.nextElementSibling;
-        if (!ul) return;
-
-        let visibleCount = 0;
-        ul.querySelectorAll('li').forEach(function (li) {
-          let eventDate;
-          if (li.dataset.datum) {
-            const d = li.dataset.datum.split('-');
-            eventDate = new Date(+d[0], +d[1] - 1, +d[2]);
-          } else {
-            const span = li.querySelector('span');
-            if (!span) return;
-            const parts = span.textContent.trim().replace(/\.$/, '').split('.');
-            if (parts.length < 2) return;
-            eventDate = new Date(year, parseInt(parts[1], 10) - 1, parseInt(parts[0], 10));
-          }
-          if (eventDate < today) {
-            li.style.display = 'none';
-          } else {
-            visibleCount++;
-          }
-        });
-
-        // Hide the whole month block if no events remain
-        if (visibleCount === 0) {
-          h3.style.display = 'none';
-          ul.style.display = 'none';
-        }
-      });
-    })();
-
-    /* Menü "Aktuelle Veranstaltungen": Inhalt aus der Terminliste aufbauen.
-       Läuft nach dem Ausblenden vergangener Termine, zeigt also nur kommende. */
+    /* Menü "Herbst-Tour": Inhalt aus der Terminliste aufbauen.
+       Die Tour bleibt vollständig sichtbar, auch vergangene Termine. */
     (function () {
       const menue = document.getElementById('eventsDropdown');
       const sektion = document.getElementById('events');
