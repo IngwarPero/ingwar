@@ -2580,8 +2580,35 @@
   </script>
 
   <script>
+    /* Vergangene Termine ausblenden. Jeder Termin trägt sein volles Datum (data-datum),
+       am Veranstaltungstag selbst bleibt er sichtbar. Monatsblöcke ohne Termine verschwinden. */
+    (function () {
+      const section = document.getElementById('events');
+      if (!section) return;
+      const heute = new Date();
+      heute.setHours(0, 0, 0, 0);
+
+      section.querySelectorAll('h3').forEach(function (h3) {
+        let ul = h3.nextElementSibling;
+        while (ul && ul.tagName !== 'UL') ul = ul.nextElementSibling;
+        if (!ul) return;
+
+        let sichtbar = 0;
+        ul.querySelectorAll('li[data-datum]').forEach(function (li) {
+          const d = li.dataset.datum.split('-');
+          const tag = new Date(+d[0], +d[1] - 1, +d[2]);
+          if (tag < heute) li.style.display = 'none';
+          else sichtbar++;
+        });
+        if (sichtbar === 0) {
+          h3.style.display = 'none';
+          ul.style.display = 'none';
+        }
+      });
+    })();
+
     /* Menü "Herbst-Tour": Inhalt aus der Terminliste aufbauen.
-       Die Tour bleibt vollständig sichtbar, auch vergangene Termine. */
+       Läuft nach dem Ausblenden vergangener Termine, zeigt also nur kommende. */
     (function () {
       const menue = document.getElementById('eventsDropdown');
       const sektion = document.getElementById('events');
